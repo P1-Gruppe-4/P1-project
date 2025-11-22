@@ -1,6 +1,6 @@
 # P1-gruppe4
 ## Deadline: 22nd of December 2025 | Exam: 29th of January 2026
-<h2>Rules for contributing</h2><sup>1</sup>
+<h2>Rules for contributing<sup>1</sup></h2>
 <ul>
   <li>
     Formatting:
