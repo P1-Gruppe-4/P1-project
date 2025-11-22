@@ -26,6 +26,6 @@ typedef struct car
 lot** ArrayAlloc(int length, int width);
 lot** ArrayFill(lot** pointer, int length, int width);
 void ArrayPrint(lot** pointer, int length, int width);
-void ArrayFree(lot** pointer, int length, int width);
+//void ArrayFree(lot** pointer, int length, int width);
 
 

@@ -12,10 +12,10 @@
 //todo: apply new struct names etc.
 lot** ArrayAlloc (int length, int width)
 {
-    lot** pointer = malloc(sizeof(*pointer) * (size_t)length);
+    lot** pointer = malloc(sizeof(*pointer) * (size_t)length); //how many areas do I want
     assert(pointer != NULL);
 
-    for(size_t i=0; i<(size_t)length; i++)
+    for(size_t i=0; i<(size_t)width; i++) // how big are the inside-arrays
     {
         pointer[i] = malloc(sizeof(**pointer) * (size_t)width);
         assert(pointer[i] != NULL);
@@ -51,10 +51,12 @@ void ArrayPrint (lot** pointer, int length, int width)
     printf("\n");
 }
 
+/*
+ * The function below did for some reason not work, someone please review
 void ArrayFree (lot** pointer, int length, int width)
 {
 
-    for(size_t i=0; i<length; i++)
+    for(int i=0; i<length; i++)
     {
         free(pointer[i]);
         pointer[i] = NULL;
@@ -62,3 +64,4 @@ void ArrayFree (lot** pointer, int length, int width)
     free(pointer);
     pointer = NULL;
 }
+*/
