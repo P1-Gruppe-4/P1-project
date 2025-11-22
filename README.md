@@ -1,6 +1,6 @@
 # P1-gruppe4
 ## Deadline: 22nd of December 2025 | Exam: 29th of January 2026
-## Rules for contributing
+<h2>Rules for contributing</h2><sup>1</sup>
 <ul>
   <li>
     Formatting:
@@ -27,3 +27,5 @@
     </ul>
   </li>
 </ul>
+<hr>
+<sup>1</sup> Failing to adhere to these rules can result in being banned from contributing to the codebase
