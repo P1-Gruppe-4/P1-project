@@ -12,7 +12,7 @@
 //todo: apply new struct names etc.
 lot** ArrayAlloc (int length, int width)
 {
-    lot** pointer = malloc(sizeof(*pointer) * (size_t)length); //how many areas do I want
+    lot** pointer = malloc(sizeof(*pointer) * (size_t)length); //how many arrays do I want
     assert(pointer != NULL);
 
     for(size_t i=0; i<(size_t)width; i++) // how big are the inside-arrays
@@ -37,14 +37,15 @@ lot** ArrayFill (lot** pointer, int length, int width){
     return pointer;
 }
 
-
+//This functions print out the parkingLot array in a 2d grid. It is not necessarily suited for the later, user-interface
+//of our application and should maybe rather only be used for inital debugging purposes
 void ArrayPrint (lot** pointer, int length, int width)
 {
     for(int i=0; i<length; i++)
     {
         for(int j=0; j<width; j++)
         {
-            printf("%d  ", pointer[i][j]);
+            printf("[Status: %d  Handicap: %d] ", pointer[i][j].status, pointer[i][j].handicap);
         }
         printf("\n");
     }
@@ -52,7 +53,7 @@ void ArrayPrint (lot** pointer, int length, int width)
 }
 
 /*
- * The function below did for some reason not work, someone please review
+ * The function below did for some reason not work, someone please review:
 void ArrayFree (lot** pointer, int length, int width)
 {
 
