@@ -4,7 +4,7 @@
 #include <assert.h>
 
 void create_menu() {
-    printf("Welcome to Lotimizer2D\n----------------------\nType 1 to create a new lot, type 2 to read from file\n");
+    printf("Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n");
     int input;
     scanf("%d", &input);
 
@@ -29,16 +29,38 @@ void create_menu() {
     else if (input == 2) {
         printf("If you want to load from autosave press 1\nIf you want to load from a different file press 2\n");
         int input = 0;
+        char autofile[] = "autosave.txt";
+        char filename[100];
         scanf("%d", &input);
         switch (input) {
             case 1:
-                FILE* savefile = fopen("autosave.txt", "r");
-                load_save(savefile);
-                break;
-            case 2:
-                printf("not yet implemented\n");
-                exit(0);
+                    FILE* autosavefile = fopen(autofile, "r");
 
+                    if (autosavefile == NULL) {
+                        printf("ERROR! No auto saves found! Redirecting to the main menu.\n\n");
+                    }
+                    else {
+                        load_save(autosavefile);
+                    }
+                    create_menu();
+                    break;
+
+            case 2: {
+                while (1) {
+                    printf("Please enter filename:\n");
+                    scanf("%99s", filename);
+                    FILE* savefile = fopen(filename, "r");
+
+                    if (savefile == NULL) {
+                        printf("ERROR! Invalid input, try again:\n\n");
+                    }
+                    else {
+                        load_save(savefile);
+                        break;
+                    }
+                }
+                break;
+            }
         }
     }
     else {
