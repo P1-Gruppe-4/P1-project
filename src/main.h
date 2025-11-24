@@ -30,6 +30,7 @@ lot** ArrayAlloc(int length, int width);
 lot** ArrayFill(lot** pointer, int length, int width);
 void ArrayPrint(lot** pointer, int length, int width);
 //void ArrayFree(lot** pointer, int length, int width);
+void ArrangeCar(lot** parkingLot, car Car, int x0, int y0);
 
 //prototypes from menu.c
 void create_menu();
