@@ -8,4 +8,6 @@ include_directories(src)
 add_executable(P1_gruppe4
         src/main.c
         src/main.h
-        src/arrays.c)
+        src/arrays.c
+        src/menu.c
+        src/save.c)
