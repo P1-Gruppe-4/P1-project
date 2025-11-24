@@ -21,7 +21,7 @@ lot** ArrayAlloc (int length, int width)
         assert(pointer[i] != NULL);
     }
 
-    return pointer;
+    return pointer; 
 }
 
 lot** ArrayFill (lot** pointer, int length, int width){

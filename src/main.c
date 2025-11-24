@@ -7,21 +7,7 @@ void ArrangeCar(lot** parkingLot, car Car, int x0, int y0);
 
 int main(int argc, char* argv[])
 {
-    int lenght, width;
-    printf("Enter length, then width as integers: ");
-    scanf("%d %d", &lenght, &width);
-    assert(width > 0 && lenght > 0); //debug
-
-    lot** parkingLot = ArrayAlloc(lenght, width);
-    ArrayFill(parkingLot, lenght, width);
-    ArrayPrint(parkingLot, lenght, width);
-
-    car testcar = {3, 2, 1};
-    ArrangeCar(parkingLot, testcar, 1, 1);
-    ArrayPrint(parkingLot, lenght, width);
-
-    //ArrayFree(parkingLot, lenght, width);
-    free(parkingLot);
+    create_menu();
     return 0;
 }
 

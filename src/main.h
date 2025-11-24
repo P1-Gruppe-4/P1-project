@@ -4,7 +4,10 @@
 
 #ifndef P1_GRUPPE4_MAIN_H
 #define P1_GRUPPE4_MAIN_H
+
+//necessary headerfiles
 #include <stddef.h>
+#include <stdio.h>
 
 #endif //P1_GRUPPE4_MAIN_H
 
@@ -28,4 +31,10 @@ lot** ArrayFill(lot** pointer, int length, int width);
 void ArrayPrint(lot** pointer, int length, int width);
 //void ArrayFree(lot** pointer, int length, int width);
 
+//prototypes from menu.c
+void create_menu();
+void ArrangeCar(lot** parkingLot, car Car, int x0, int y0);
 
+//prototypes from save.c
+void auto_save (lot** pointer, int length, int width);
+lot** load_save(FILE* savefile);
