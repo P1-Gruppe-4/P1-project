@@ -8,8 +8,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include "main.h"
-//todo: adapt whole to new project names
-//todo: apply new struct names etc.
 lot** ArrayAlloc (int length, int width)
 {
     lot** pointer = malloc(sizeof(*pointer) * (size_t)length); //how many arrays do I want
@@ -65,6 +63,7 @@ void ArrayFree (lot** pointer, int length, int width)
     free(pointer);
     pointer = NULL;
 }
+
 */
 //This function takes a given car, and its assigned lot, and then puts said car into its spot inside the
 //parkingLot array
