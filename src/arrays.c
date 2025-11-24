@@ -8,13 +8,14 @@
 #include <stdio.h>
 #include <assert.h>
 #include "main.h"
-
-int** array_alloc (int length, int width)
+//todo: adapt whole to new project names
+//todo: apply new struct names etc.
+lot** ArrayAlloc (int length, int width)
 {
-    int** pointer = malloc(sizeof(*pointer) * (size_t)length);
+    lot** pointer = malloc(sizeof(*pointer) * (size_t)length); //how many arrays do I want
     assert(pointer != NULL);
 
-    for(size_t i=0; i<(size_t)length; i++)
+    for(size_t i=0; i<(size_t)width; i++) // how big are the inside-arrays
     {
         pointer[i] = malloc(sizeof(**pointer) * (size_t)width);
         assert(pointer[i] != NULL);
@@ -23,35 +24,40 @@ int** array_alloc (int length, int width)
     return pointer;
 }
 
-int** arena_fill (int** pointer, size_t arena_size){
-    for(size_t i=0; i<arena_size; i++) //using size_t, since sizeof() returns a size_t - at least as far as I understand
+lot** ArrayFill (lot** pointer, int length, int width){
+    for(int i=0; i<width; i++) //using size_t, since sizeof() returns a size_t - at least as far as I understand
     {
-        for(size_t j=0; j<arena_size; j++)
+        for(int j=0; j<length; j++)
         {
-            pointer[i][j] = 9;
+            pointer[i][j].status = 0;
+            pointer[i][j].handicap = 0;
         }
     }
 
     return pointer;
 }
 
-void arena_print (int** pointer, size_t arena_size)
+//This functions print out the parkingLot array in a 2d grid. It is not necessarily suited for the later, user-interface
+//of our application and should maybe rather only be used for inital debugging purposes
+void ArrayPrint (lot** pointer, int length, int width)
 {
-    for(size_t i=0; i<arena_size; i++)
+    for(int i=0; i<length; i++)
     {
-        for(size_t j=0; j<arena_size; j++)
+        for(int j=0; j<width; j++)
         {
-            printf("%d  ", pointer[i][j]);
+            printf("[Status: %d  Handicap: %d] ", pointer[i][j].status, pointer[i][j].handicap);
         }
         printf("\n");
     }
     printf("\n");
 }
 
-void arena_free (int** pointer, size_t arena_size)
+/*
+ * The function below did for some reason not work, someone please review:
+void ArrayFree (lot** pointer, int length, int width)
 {
 
-    for(size_t i=0; i<arena_size; i++)
+    for(int i=0; i<length; i++)
     {
         free(pointer[i]);
         pointer[i] = NULL;
@@ -59,3 +65,4 @@ void arena_free (int** pointer, size_t arena_size)
     free(pointer);
     pointer = NULL;
 }
+*/
