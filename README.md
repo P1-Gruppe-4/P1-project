@@ -5,7 +5,7 @@
   <li>
     Formatting:
     <ul>
-      <li>Generally we use underscores for function names</li>
+      <li>Generally we use underscore- or camelcase notation for function names</li>
       <li>Constants both local and symbolic i.e. C-code and Preprocessor are to be written in all caps</li>
       <li>Any names are to be clearly descriptive and distinct, however they must not be overly long</li>
     </ul>
