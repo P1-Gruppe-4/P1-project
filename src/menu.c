@@ -32,18 +32,18 @@ void create_menu() {
         char autofile[] = "autosave.txt";
         char filename[100];
         scanf("%d", &input);
+
         switch (input) {
             case 1:
                     FILE* autosavefile = fopen(autofile, "r");
 
                     if (autosavefile == NULL) {
                         printf("ERROR! No auto saves found! Redirecting to the main menu.\n\n");
+                        create_menu();
+                        break;
                     }
-                    else {
-                        load_save(autosavefile);
-                    }
-                    create_menu();
-                    break;
+                load_save(autosavefile);
+                break;
 
             case 2: {
                 while (1) {
@@ -61,6 +61,9 @@ void create_menu() {
                 }
                 break;
             }
+            default:
+                printf("ERROR! Invalid input, redirecting to the main menu.\n\n");
+                create_menu();
         }
     }
     else {
@@ -68,4 +71,3 @@ void create_menu() {
         create_menu();
     }
 }
-
