@@ -1,2 +1,1 @@
 Hello world.
-Daniels mega seje test fordi nvim 
