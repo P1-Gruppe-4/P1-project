@@ -13,7 +13,7 @@
   <li>
     Gen-AI:
     <ul>
-      <li>Generally there is ***no*** Gen-AI use.</li>
+      <li>Generally there is <strong>no</strong> Gen-AI use.</li>
       <li>In general in cases where Gen-AI may be used, it is advised to ask/use the project group first.</li>
       <li>if Gen-AI is used e.g. for debugging it is to be clearly stated.</li>
     </ul>
@@ -22,7 +22,7 @@
     Sources:
     <ul>
       <li>When external sources are used, they are to be clearly stated and linked.</li>
-      <li>This especially applies to ***copied code***, which generally is to be kept to a minimum.</li>
+      <li>This especially applies to <strong>copied code</strong>, which generally is to be kept to a minimum.</li>
       <li>Sources should additionally be made available in our Discord Server</li>
     </ul>
   </li>
