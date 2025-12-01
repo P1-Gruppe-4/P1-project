@@ -5,7 +5,6 @@
 #define carLength 2
 
 lot** carFill(lot** pointer, int length, int width){
-  int count=1;
   //for loop demon right here
   for(int i=0; i<length; i++){ //i & j loops tru whole parking lot 
     for(int j=0; j<width; j++){
