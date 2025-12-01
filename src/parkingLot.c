@@ -5,16 +5,21 @@
 
 lot** carFill(lot** pointer, int length, int width){
     
-  for(int i=0; i<length; i++){
+  for(int i=0; i<length; i++){ 
     for(int j=0; j<width; j++){
-      for(int x=0; x<pathSpace; x++){
+      for(int x=0; x<pathSpace; x++){ //First three meters from the top are road
         pointer[x][j].status=2;
+        if (j == width-pathSpace) {
+          for(int y=width-pathSpace; y<=width; y++){
+          pointer[i][y].status=2;
+          }
+        }
       }
     }
   }
 
 return pointer;
-
+}
   /*
   for(int i=0; i<width; i++) //using size_t, since sizeof() returns a size_t - at least as far as I understand
     {
