@@ -8,7 +8,6 @@
 //necessary headerfiles
 #include <stddef.h>
 #include <stdio.h>
-#endif //P1_GRUPPE4_MAIN_H
 
 //structs for project
 
