@@ -21,7 +21,7 @@ void create_menu() {
         //car testcar = {3, 2, 1};
         //ArrangeCar(parkingLot, testcar, 1, 1); is commented out to prevent temporary segmentationfaults
         ArrayPrint(parkingLot, lenght, width);
-        auto_save(parkingLot, lenght, width);
+        auto_save(parkingLot, lenght, width) ;
 
         //ArrayFree(parkingLot, lenght, width);
         free(parkingLot);

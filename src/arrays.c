@@ -3,8 +3,6 @@
  * Denne kode stammer fra oprindeligt: https://stackoverflow.com/questions/42094465/correctly-allocating-multi-dimensional-arrays
  * Da jeg havde problemer med at få allocationen af arena arrayet til at virke. Jeg har blot afproevet og aendret koden, saaledes, at den passer til projektet
  */
-length = antal raekker (y)
-width = antal kolonner (x)
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -45,7 +43,7 @@ void ArrayPrint (lot** pointer, int length, int width)
     {
         for(int j=0; j<length; j++)
         {
-            printf("[Status: %d  Handicap: %d] ", pointer[i][j].status, pointer[i][j].handicap);
+            printf("[Status: %d  Handicap: %d] ", pointer[j][i].status, pointer[j][i].handicap);
         }
         printf("\n");
     }
@@ -85,5 +83,5 @@ void ArrangeCar(lot** parkingLot, car Car, int x0, int y0)
             parkingLot[i][j].status = 1; //cause sigsegv
         }
     }
-    printf("\nCar has recieved adequated spot\n");
+    printf("\nCar has recieved adequated spot\n"); //debug
 }
