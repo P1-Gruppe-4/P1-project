@@ -11,8 +11,4 @@ optaget (eller assigner en car til den plads, hvis vi
 vil holde styr på det i memory?)
 */ 
 
-lot** scoreAssigner(lot** parkingLot){
   /*Gennemgår parkeringspladsen procedurely og giver pladser til forskellige størrelse biler*/
-
-
-}

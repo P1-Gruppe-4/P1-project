@@ -1,9 +1,22 @@
 #include <stdio.h>
 #include "main.h"
 
+#define pathSpace 3
 
-lot** carFill (lot** pointer, int length, int width){
-    for(int i=0; i<width; i++) //using size_t, since sizeof() returns a size_t - at least as far as I understand
+lot** carFill(lot** pointer, int length, int width){
+    
+  for(int i=0; i<length; i++){
+    for(int j=0; j<width; j++){
+      for(int x=0; x<pathSpace; x++){
+        pointer[x][j].status=2;
+      }
+    }
+  }
+
+return pointer;
+
+  /*
+  for(int i=0; i<width; i++) //using size_t, since sizeof() returns a size_t - at least as far as I understand
     {
         for(int j=0; j<length; j++)
         {
@@ -14,11 +27,9 @@ lot** carFill (lot** pointer, int length, int width){
 
     return pointer;
 }
+*/
 
-lot** pathCreate(lot** pointer, int length, int width){
-
-}
-
+/*
 //This functions print out the parkingLot array in a 2d grid. It is not necessarily suited for the later, user-interface
 //of our application and should maybe rather only be used for inital debugging purposes
 void ArrayPrint (lot** pointer, int length, int width)
@@ -34,4 +45,4 @@ void ArrayPrint (lot** pointer, int length, int width)
     printf("\n");
 }
 
-
+*/
