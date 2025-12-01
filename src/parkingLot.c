@@ -2,17 +2,28 @@
 #include "main.h"
 
 #define pathSpace 3
+#define carLength 2
 
 lot** carFill(lot** pointer, int length, int width){
-    
-  for(int i=0; i<length; i++){ 
+  int count=1;
+  //for loop demon right here
+  for(int i=0; i<length; i++){ //i & j loops tru whole parking lot 
     for(int j=0; j<width; j++){
-      for(int x=0; x<pathSpace; x++){ //First three meters from the top are road
+      for(int x=0; x<pathSpace; x++){ //x & y loops tru the top and right side for pathspace size 
         pointer[x][j].status=2;
         if (j == width-pathSpace) {
-          for(int y=width-pathSpace; y<=width; y++){
+          for(int y=width-pathSpace; y<width; y++){
           pointer[i][y].status=2;
           }
+        }
+      }
+      for(int n=0; n<pathSpace; n++){ //inital path 
+        pointer[carLength*2+pathSpace+n][j].status=2;
+      }
+      //makes a path every carlength*2
+      for(int c=carLength*2+pathSpace*3+1; c+pathSpace<=length; c+=carLength*2+pathSpace){
+        for(int n = 0; n < pathSpace; n++){
+              pointer[c + n][j].status = 2;
         }
       }
     }
