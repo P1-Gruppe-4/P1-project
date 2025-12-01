@@ -11,16 +11,29 @@
 
 //structs for project
 
+
 typedef struct lot{
-    int status; //0 for free, 1 for occupied
-    int handicap; //0 for no, 1 for yes
-} lot;
+  int status; 
+  int sizeClass; //skal måske være en struct for sig selv?
+  double stayDuration;
+  int handicap; // 0=no, 1=yes
+  int passengers; //children or elderly so just a bool
+  //int staff; //also bool
+}lot;
 
 typedef struct car
 {
+    //de først tre er temp
+    int doorLength;
     int length;
     int width;
-    int doorLength;
+
+    int sizeClass; //skal måske være en struct for sig selv?
+    double stayDuration;
+    int handicap; // 0=no, 1=yes
+    int passengers; //either childre or elderly so really just a bool
+    //int staff; //also bool
+
 } car;
 
 //prototypes from arrays.c
@@ -37,5 +50,14 @@ void ArrangeCar(lot** parkingLot, car Car, int x0, int y0);
 //prototypes from save.c
 void auto_save (lot** pointer, int length, int width);
 lot** load_save(FILE* savefile);
+//prototypes from optimizer.c
+lot** scoreAssigner(lot** parkingLot);
+void usrInput();
+void scoreCalculator();
+void spaceAllocater();
 
-#endif //P1_GRUPPE4_MAIN_H
+//prototypes for parkingLot.c (mby temp fil idk)
+lot** carFill(lot** pointer, int length, int width);
+//lot** pathCreate(lot** pointer, int length, int width);
+//void ArrayPrint(lot** pointer, int length, int width);
+

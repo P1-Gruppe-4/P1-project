@@ -41,9 +41,16 @@ void ArrayPrint (lot** pointer, int length, int width)
 {
     for(int i=0; i<width; i++)
     {
-        for(int j=0; j<length; j++)
-        {
-            printf("[Status: %d  Handicap: %d] ", pointer[j][i].status, pointer[j][i].handicap);
+        for(int j=0; j<width; j++)
+        {   
+            if(pointer[i][j].status==0){
+            printf("[ ]");
+            }else{
+        printf("[%d]", pointer[i][j].status);
+      }
+
+
+      //printf("[Status: %d  Handicap: %d] ", pointer[i][j].status, pointer[i][j].handicap);
         }
         printf("\n");
     }
