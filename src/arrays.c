@@ -39,7 +39,7 @@ lot** ArrayFill (lot** pointer, int length, int width){
 //of our application and should maybe rather only be used for inital debugging purposes
 void ArrayPrint (lot** pointer, int length, int width)
 {
-    for(int i=0; i<width; i++)
+    for(int i=0; i<length; i++)
     {
         for(int j=0; j<width; j++)
         {   

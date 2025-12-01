@@ -60,4 +60,4 @@ void spaceAllocater();
 lot** carFill(lot** pointer, int length, int width);
 //lot** pathCreate(lot** pointer, int length, int width);
 //void ArrayPrint(lot** pointer, int length, int width);
-
+#endif //P1_GRUPPE4_MAIN_H
