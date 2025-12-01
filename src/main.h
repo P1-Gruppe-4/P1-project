@@ -9,8 +9,6 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#endif //P1_GRUPPE4_MAIN_H
-
 //structs for project
 
 typedef struct lot{
@@ -39,3 +37,5 @@ void ArrangeCar(lot** parkingLot, car Car, int x0, int y0);
 //prototypes from save.c
 void auto_save (lot** pointer, int length, int width);
 lot** load_save(FILE* savefile);
+
+#endif //P1_GRUPPE4_MAIN_H
