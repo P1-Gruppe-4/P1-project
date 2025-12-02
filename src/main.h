@@ -12,9 +12,31 @@
 //enum passenger type
 typedef enum {
     Adult,
-    Child,
+    Family,
     Elderly
 } passengerType;
+
+typedef enum {
+    Status_Free,
+    Status_Reserved,
+    Status_Path,
+    Status_Entrance,
+    Status_Exit
+} LotStatus;
+
+typedef enum {
+    Small,
+    Medium,
+    Big,
+    Special
+} carSize;
+
+typedef enum {
+    Worker,
+    VIP,
+    Guest
+} roleVenue;
+
 
 //structs for project
 
@@ -24,27 +46,23 @@ typedef struct car {
     int doorLength;
     int handicap;
     double durationStay;
-    char *size;
+    carSize size;
     passengerType passenger;
-    char *role;
+    roleVenue role;
 } car;
 
 typedef struct lot {
-    int status; //0 for free, 1 for occupied
-    int handicap; //0 for no, 1 for yes
-    double durationStay; // double for hours of duration staying
+    LotStatus status;
+    int isHandicapSpot; //0 for no, 1 for yes
+    double maxDuration; // double for hours of duration staying
     int xIndex;
     int yIndex;
-    char *size;
-    passengerType passenger;
-    char *role;
-    car car;
+    carSize maxSize;
+    passengerType preferredPassenger;
+    roleVenue allowedRole;
+    car* car;
+    int distance;
 } lot;
-
-typedef struct lot lot;
-
-
-typedef struct car car;
 
 //prototypes from arrays.c
 lot **ArrayAlloc(int length, int width);
@@ -59,8 +77,6 @@ void ArrangeCar(lot **parkingLot, car Car, int x0, int y0);
 //prototypes from menu.c
 void create_menu();
 
-void ArrangeCar(lot **parkingLot, car Car, int x0, int y0);
-
 //prototypes from save.c
 void auto_save(lot **pointer, int length, int width);
 
@@ -68,8 +84,8 @@ lot **load_save(FILE *savefile);
 
 //prototypes from mapToLot.c
 int isHandicap(lot lot, int carHand);
-int isType(lot lot, char *carType);
-int isRole(lot lot, char *role);
+int isType(lot lot, carSize size);
+int isRole(lot lot, roleVenue role);
 
 lot *filterSpots(car carUser, lot **pLot, int length, int width, int *matches);
 
@@ -78,5 +94,12 @@ double passengerScore(lot *l, car c);
 double calcScore(double passengerScore, double durationScore);
 
 void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *matchW);
+
+
+//prototypes fra parkingLot.c
+int comp(const void *a, const void *b);
+void sortPark(lot parkingArr[], int last, int (*fptr)(const void *, const void *));
+lot **lotAssigner(lot **parkingLot, int length, int width);
+lot **pathCreator(lot **parkingLot, int length, int width);
 
 #endif //P1_GRUPPE4_MAIN_H
