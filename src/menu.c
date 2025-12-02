@@ -9,21 +9,22 @@ void create_menu() {
     scanf("%d", &input);
 
     if (input == 1) {
-        int lenght, width;
+        int length, width;
         printf("Enter length, then width as integers: ");
-        scanf("%d %d", &lenght, &width);
-        assert(width > 0 && lenght > 0); //debug
+        scanf("%d %d", &length, &width);
+        assert(width > 0 && length > 0); //debug
 
-        lot** parkingLot = ArrayAlloc(lenght, width);
-        ArrayFill(parkingLot, lenght, width);
-        ArrayPrint(parkingLot, lenght, width);
-
+        lot** parkingLot = ArrayAlloc(length, width);
+        ArrayFill(parkingLot, length, width);
+        ArrayPrint(parkingLot, length, width);
+        pathCreator(parkingLot, length, width);
+        ArrayPrint(parkingLot, length, width);
         //car testcar = {3, 2, 1};
-        //ArrangeCar(parkingLot, testcar, 1, 1); is commented out to prevent temporary segmentationfaults
-        ArrayPrint(parkingLot, lenght, width);
-        auto_save(parkingLot, lenght, width) ;
+        //ArrangeCar(parkingLot, testcar, 1, 1); //is commented out to prevent temporary segmentationfaults
+        //ArrayPrint(parkingLot, length, width);
+        auto_save(parkingLot, length, width);
 
-        //ArrayFree(parkingLot, lenght, width);
+        //ArrayFree(parkingLot, length, width);
         free(parkingLot);
     }
     else if (input == 2) {

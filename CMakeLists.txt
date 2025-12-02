@@ -12,4 +12,4 @@ add_executable(P1_gruppe4
         src/menu.c
         src/save.c
         src/mapToLot.c
-)
+        src/parkingLot.c)

@@ -35,10 +35,20 @@ lot **ArrayFill(lot **pointer, int length, int width) {
 
 //This functions print out the parkingLot array in a 2d grid. It is not necessarily suited for the later, user-interface
 //of our application and should maybe rather only be used for inital debugging purposes
-void ArrayPrint(lot **pointer, int length, int width) {
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < length; j++) {
-            printf("[Status: %d  Handicap: %d] ", pointer[j][i].status, pointer[j][i].handicap);
+void ArrayPrint (lot** pointer, int length, int width)
+{
+    for(int i=0; i<length; i++)
+    {
+        for(int j=0; j<width; j++)
+        {   
+            if(pointer[i][j].status==0){
+            printf("[ ]");
+            }else{
+        printf("[%d]", pointer[i][j].status);
+      }
+
+
+      //printf("[Status: %d  Handicap: %d] ", pointer[i][j].status, pointer[i][j].handicap);
         }
         printf("\n");
     }
