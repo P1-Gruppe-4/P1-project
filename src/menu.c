@@ -2,6 +2,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
+
+
+//Bjarne grrr code ahh
+
+car create_car() {
+
+    car newCar;
+    char handicapInput[10];   // buffer to store "Yes" / "No"
+
+    printf("Enter car length as doubles in meters: ");
+    scanf("%d", &newCar.length);
+
+    printf("Enter car width as doubles in meters: ");
+    scanf("%d", &newCar.width);
+
+    printf("Enter door length as doubles in meters: ");
+    scanf("%d", &newCar.doorLength);
+
+    printf("Enter stay duration time as intigers in seconds: ");
+    scanf("%d", &newCar.stayDuration);
+
+    printf("Enter handicap, type Yes or No: ");
+    scanf("%9s", handicapInput);   // read string
+
+    // Convert string to handicap value
+    if (strcmp(handicapInput, "Yes") == 0 || strcmp(handicapInput, "yes") == 0) {
+        newCar.handicap = 1;
+    }
+    else if (strcmp(handicapInput, "No") == 0 || strcmp(handicapInput, "no") == 0) {
+        newCar.handicap = 0;
+    }
+    else {
+        printf("Invalid input, defaulting handicap to 0\n");
+        newCar.handicap = 0;
+    }
+
+    printf("Enter amount of passengers: ");
+    scanf("%d", &newCar.passengers);
+
+    return newCar;
+}
+
+
+
 
 void create_menu() {
     printf("Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n");
