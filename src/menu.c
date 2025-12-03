@@ -59,7 +59,7 @@ void create_menu() {
         lot** parkingLot = ArrayAlloc(length, width);
         ArrayFill(parkingLot, length, width);
         ArrayPrint(parkingLot, length, width);
-        carFill(parkingLot, length, width);
+        pathCreator(parkingLot, length, width);
         ArrayPrint(parkingLot, length, width);
         //car testcar = {3, 2, 1};
         //ArrangeCar(parkingLot, testcar, 1, 1); //is commented out to prevent temporary segmentationfaults
