@@ -1,7 +1,3 @@
-//
-// Created by matei on 01/12/2025.
-//
-
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
@@ -118,7 +114,6 @@ void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *
     //Stops function if no matches or matchLot is empty
     if (matches==0||matchLot==NULL) {
         printf("No parking space matches your car\n");
-        return;
     }
 
 
