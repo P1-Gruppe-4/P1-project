@@ -26,7 +26,7 @@ lot **ArrayFill(lot **pointer, int length, int width) {
     {
         for (int j = 0; j < length; j++) {
             pointer[i][j].status = 0;
-            pointer[i][j].handicap = 0;
+        //    pointer[i][j].handicap = 0;
         }
     }
 
