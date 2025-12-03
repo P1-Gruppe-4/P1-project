@@ -34,7 +34,7 @@ lot** load_save(FILE* savefile) {
     lot **parkingLot = ArrayAlloc(length, width);
     for(int i=0; i<length; i++) {
         for(int j=0; j<width; j++) {
-            fscanf(savefile, "%d %d-", &parkingLot[i][j].status, &parkingLot[i][j].isHandicapSpot);
+//            fscanf(savefile, "%d %d-", &parkingLot[i][j].status, &parkingLot[i][j].isHandicapSpot);
         }
     }
 

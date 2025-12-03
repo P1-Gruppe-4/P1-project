@@ -89,7 +89,7 @@ double durationScore(lot *l, car c) {
 
 //Function to return a passengerscore, based on how well the parkingspot matches the car
 double passengerScore(lot *l, car c) {
-    int val = abs(c.passenger - l->preferredPassenger);
+    int val = c.passenger - l->preferredPassenger;
     if (val == 0) {
         return 1;
     } else if (val == 1) {

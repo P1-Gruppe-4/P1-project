@@ -32,8 +32,8 @@ lot **pathCreator(lot **parkingLot, int length, int width) {
                     parkingLot[i][j].status = Status_Entrance; // status for entrance
                 } else if (i == length - 1) {
                     parkingLot[i][j].status = Status_Exit; // status for exit
-                }
             }
+          }
         }
     }
     return parkingLot;
@@ -76,7 +76,7 @@ lot **lotAssigner(lot **parkingLot, int length, int width) {
             if (parkingLot[i][j].status == Status_Free) {
                 lotTemp[k] = parkingLot[i][j];
                 k++;
-            }
+          }
         }
     }
 
