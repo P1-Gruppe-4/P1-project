@@ -1,7 +1,3 @@
-//
-// Created by matei on 01/12/2025.
-//
-
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +5,7 @@
 
 //Function to check if car and parkingspot match on handicap parameter
 int isHandicap(lot lot, int carHand) {
-    if (lot.handicap == carHand) {
+    if (lot.isHandicapSpot == carHand) {
         return 1;
     } else {
         return 0;
@@ -17,8 +13,8 @@ int isHandicap(lot lot, int carHand) {
 }
 
 //Function to check if car and parkingspot match on carType parameter
-int isType(lot lot, char *carType) {
-    if (strcmp(lot.size, carType) == 0) {
+int isType(lot lot, carSize size) {
+    if (lot.maxSize == size) {
         return 1;
     } else {
         return 0;
@@ -26,8 +22,8 @@ int isType(lot lot, char *carType) {
 }
 
 //Function to check if car and parkingspot match on role parameter
-int isRole(lot lot, char *role) {
-    if (strcmp(lot.role, role) == 0) {
+int isRole(lot lot, roleVenue role) {
+    if (lot.allowedRole == role) {
         return 1;
     } else {
         return 0;
@@ -75,11 +71,11 @@ lot *filterSpots(car carUser, lot **pLot, int length, int width, int *matches) {
 //Function to calculate a durations score based on the duration time of the parking space and the car
 double durationScore(lot *l, car c) {
     //if the car needs to be parked longer than the space allows, return 0
-    if (c.durationStay > l->durationStay) {
+    if (c.durationStay > l->maxDuration) {
         return 0;
     }
 
-    double difference = l->durationStay - c.durationStay;
+    double difference = l->maxDuration - c.durationStay;
     double maxDiff = 4;
     //you don't want the difference in the parking space and the car's time is over 4 hours, it's too much waste.
 
@@ -93,7 +89,7 @@ double durationScore(lot *l, car c) {
 
 //Function to return a passengerscore, based on how well the parkingspot matches the car
 double passengerScore(lot *l, car c) {
-    int val = abs(c.passenger - l->passenger);
+    int val = c.passenger - l->preferredPassenger;
     if (val == 0) {
         return 1;
     } else if (val == 1) {
@@ -118,7 +114,6 @@ void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *
     //Stops function if no matches or matchLot is empty
     if (matches==0||matchLot==NULL) {
         printf("No parking space matches your car\n");
-        return;
     }
 
 
@@ -134,7 +129,7 @@ void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *
     }
 
         pLot[*matchL][*matchW].status = 1;
-        pLot[*matchL][*matchW].car = carUser;
+        pLot[*matchL][*matchW].car = &carUser;
 
     free(matchLot);
 }

@@ -16,7 +16,7 @@ void auto_save (lot** pointer, int length, int width)
     {
         for(int j=0; j<width; j++)
         {
-            fprintf(auto_save, "%d %d-", pointer[i][j].status, pointer[i][j].handicap); //writes every individual array-cell into autosave.txt
+            fprintf(auto_save, "%d %d-", pointer[i][j].status, pointer[i][j].isHandicapSpot); //writes every individual array-cell into autosave.txt
         }
         printf("\n");
     }
@@ -34,7 +34,9 @@ lot** load_save(FILE* savefile) {
     lot **parkingLot = ArrayAlloc(length, width);
     for(int i=0; i<length; i++) {
         for(int j=0; j<width; j++) {
-            fscanf(savefile, "%d %d-", &parkingLot[i][j].status, &parkingLot[i][j].handicap);
+
+            //todo: fix -2 bug
+            fscanf(savefile, "%d %d-", &parkingLot[i][j].status, &parkingLot[i][j].isHandicapSpot);
         }
     }
 
