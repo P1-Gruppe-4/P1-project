@@ -103,17 +103,21 @@ double calcScore(double passengerScore, double durationScore) {
 }
 
 //Function that maps car to the parking spot that fits it best, and sets it as taken by the specific car
-void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *matchW) {
+void mapToLot(car carUser, lot **pLot, int length, int width) {
     int matches = 0;
     double matchScore = 0;
     double maxMatchScore = -1;
     double dScore;
     double pScore;
+    int matchL = 0;
+    int matchW = 0;
 
     lot *matchLot = filterSpots(carUser, pLot, length, width, &matches);
     //Stops function if no matches or matchLot is empty
     if (matches==0||matchLot==NULL) {
         printf("No parking space matches your car\n");
+        free(matchLot);
+        return;
     }
 
 
@@ -123,13 +127,22 @@ void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *
         matchScore = calcScore(pScore, dScore);
         if (matchScore > maxMatchScore) {
             maxMatchScore = matchScore;
-            *matchL = matchLot[i].xIndex;
-            *matchW = matchLot[i].yIndex;
+            matchL = matchLot[i].xIndex;
+            matchW = matchLot[i].yIndex;
+        }
+    }
+    pLot[matchL][matchW].xIndex = matchL;
+    pLot[matchL][matchW].yIndex = matchW;
+
+    for (int i = matchL; i < carUser.length+matchL; i++)
+    {
+        for (int j = matchW; j < carUser.width + matchW; j++)
+        {
+            pLot[i][j].status = 1;
         }
     }
 
-        pLot[*matchL][*matchW].status = 1;
-        pLot[*matchL][*matchW].car = &carUser;
+    pLot[matchL][matchW].car = &carUser;
 
     free(matchLot);
 }

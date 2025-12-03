@@ -4,9 +4,6 @@
 #include <assert.h>
 #include <string.h>
 
-
-//Bjarne grrr code ahh
-
 car create_car() {
 
     car newCar;
@@ -21,8 +18,8 @@ car create_car() {
     printf("Enter door length as doubles in meters: ");
     scanf("%d", &newCar.doorLength);
 
-    printf("Enter stay duration time as intigers in seconds: ");
-    scanf("%d", &newCar.stayDuration);
+    printf("Enter stay duration time: ");
+    scanf("%lf", &newCar.durationStay);
 
     printf("Enter handicap, type Yes or No: ");
     scanf("%9s", handicapInput);   // read string
@@ -39,8 +36,53 @@ car create_car() {
         newCar.handicap = 0;
     }
 
-    printf("Enter amount of passengers: ");
-    scanf("%d", &newCar.passengers);
+    printf("Who is travelling in the car? 0 for Service Technician, 1 for VIP's, 2 for Guests, any key for none: ");
+    char temp = 'o';
+    scanf("%d", &temp);
+    switch (temp)
+    {
+    case '0':
+        newCar.role = temp-'0';
+        break;
+    case '1':
+        newCar.role = temp-'0';
+    case '2':
+        newCar.role = temp-'0';
+    default:
+        newCar.role = 2;
+    }
+
+    printf("If any, what passengers are in the car? 0 for Adult, 1 for Family, 2 for Elderly, any key for none: ");
+    temp = 'o';
+    scanf("%d", &temp);
+    switch (temp)
+    {
+    case '0':
+        newCar.passenger = temp-'0';
+        break;
+    case '1':
+        newCar.passenger = temp-'0';
+    case '2':
+        newCar.passenger = temp-'0';
+    default:
+        newCar.passenger = 0;
+    }
+
+    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for other");
+    temp = 'o';
+    scanf("%d", &temp);
+    switch (temp)
+    {
+    case '0':
+        newCar.size = temp-'0';
+        break;
+    case '1':
+        newCar.size = temp-'0';
+    case '2':
+        newCar.size = temp-'0';
+    default:
+        newCar.size = 2;
+    }
 
     return newCar;
 }
@@ -57,13 +99,28 @@ void create_menu() {
         assert(width > 0 && length > 0); //debug
 
         lot** parkingLot = ArrayAlloc(length, width);
-        ArrayFill(parkingLot, length, width);
+        //ArrayFill(parkingLot, length, width);
         ArrayPrint(parkingLot, length, width);
         pathCreator(parkingLot, length, width);
+        parkingLot = lotAssigner(parkingLot, length, width);
         ArrayPrint(parkingLot, length, width);
         //car testcar = {3, 2, 1};
         //ArrangeCar(parkingLot, testcar, 1, 1); //is commented out to prevent temporary segmentationfaults
         //ArrayPrint(parkingLot, length, width);
+        char c = 'y';
+
+        while (c != 'n')
+        {
+            printf("Do you wish to set cars into the lot? (y/n): ");
+            scanf(" %c", &c);
+            if (c == 'y')
+            {
+                //get car etc.
+                car new_car = create_car();
+                mapToLot(new_car, parkingLot, length, width);
+            }
+        }
+
         auto_save(parkingLot, length, width);
 
         //ArrayFree(parkingLot, length, width);

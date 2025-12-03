@@ -93,7 +93,7 @@ double durationScore(lot *l, car c);
 double passengerScore(lot *l, car c);
 double calcScore(double passengerScore, double durationScore);
 
-void mapToLot(car carUser, lot **pLot, int length, int width, int *matchL, int *matchW);
+void mapToLot(car carUser, lot **pLot, int length, int width);
 
 
 //prototypes fra parkingLot.c
