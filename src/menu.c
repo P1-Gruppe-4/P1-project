@@ -45,9 +45,6 @@ car create_car() {
     return newCar;
 }
 
-
-
-
 void create_menu() {
     printf("Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n");
     int input;
