@@ -99,8 +99,7 @@ void create_menu() {
         assert(width > 0 && length > 0); //debug
 
         lot** parkingLot = ArrayAlloc(length, width);
-        //ArrayFill(parkingLot, length, width);
-        ArrayPrint(parkingLot, length, width);
+        //ArrayFill(parkingLot, length, width); debug
         pathCreator(parkingLot, length, width);
         parkingLot = lotAssigner(parkingLot, length, width);
         ArrayPrint(parkingLot, length, width);
@@ -123,7 +122,6 @@ void create_menu() {
 
         auto_save(parkingLot, length, width);
 
-        //ArrayFree(parkingLot, length, width);
         free(parkingLot);
     }
     else if (input == 2) {
