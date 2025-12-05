@@ -18,7 +18,6 @@ void auto_save (lot** pointer, int length, int width)
         {
             fprintf(auto_save, "%d %d-", pointer[i][j].status, pointer[i][j].isHandicapSpot); //writes every individual array-cell into autosave.txt
         }
-        printf("\n");
     }
     printf("\n");
     fclose(auto_save);
