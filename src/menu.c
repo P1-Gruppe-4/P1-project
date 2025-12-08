@@ -4,21 +4,11 @@
 #include <assert.h>
 #include <string.h>
 
-car create_car() {
-
+car create_car(){
     car newCar;
     char handicapInput[10];   // buffer to store "Yes" / "No"
 
-    printf("Enter car length as doubles in meters: ");
-    scanf("%d", &newCar.length);
-
-    printf("Enter car width as doubles in meters: ");
-    scanf("%d", &newCar.width);
-
-    printf("Enter door length as doubles in meters: ");
-    scanf("%d", &newCar.doorLength);
-
-    printf("Enter stay duration time: ");
+    printf("Enter stay duration hours: ");
     scanf("%lf", &newCar.durationStay);
 
     printf("Enter handicap, type Yes or No: ");
@@ -37,49 +27,53 @@ car create_car() {
     }
 
     printf("Who is travelling in the car? 0 for Service Technician, 1 for VIP's, 2 for Guests, any key for none: ");
-    char temp = 'o';
+    int temp;
     scanf("%d", &temp);
     switch (temp)
     {
     case '0':
-        newCar.role = temp-'0';
-        break;
+      newCar.role = temp;
+      break;
     case '1':
-        newCar.role = temp-'0';
+      newCar.role = temp;
+      break;  
     case '2':
-        newCar.role = temp-'0';
+      newCar.role = temp;
+      break;
     default:
         newCar.role = 2;
     }
 
     printf("If any, what passengers are in the car? 0 for Adult, 1 for Family, 2 for Elderly, any key for none: ");
-    temp = 'o';
     scanf("%d", &temp);
     switch (temp)
     {
     case '0':
-        newCar.passenger = temp-'0';
-        break;
+      newCar.passenger = temp;
+      break;
     case '1':
-        newCar.passenger = temp-'0';
+      newCar.passenger = temp-'0';
+      break;
     case '2':
-        newCar.passenger = temp-'0';
+      newCar.passenger = temp-'0';
+      break;
     default:
-        newCar.passenger = 0;
+      newCar.passenger = 0;
     }
 
     printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for other");
-    temp = 'o';
     scanf("%d", &temp);
     switch (temp)
     {
     case '0':
-        newCar.size = temp-'0';
+        newCar.size = temp;
         break;
     case '1':
-        newCar.size = temp-'0';
+        newCar.size = temp;
+        break;
     case '2':
-        newCar.size = temp-'0';
+        newCar.size = temp;
+        break;
     default:
         newCar.size = 2;
     }

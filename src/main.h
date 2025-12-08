@@ -41,9 +41,6 @@ typedef enum {
 //structs for project
 
 typedef struct car {
-    int length;
-    int width;
-    int doorLength;
     int handicap;
     double durationStay;
     carSize size;

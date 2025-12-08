@@ -66,10 +66,11 @@ void ArrayFree(lot **pointer, int length) {
 
 //This function takes a given car, and its assigned lot, and then puts said car into its spot inside the
 //parkingLot array
+/*
 void ArrangeCar(lot **parkingLot, car Car, int x0, int y0) {
-    int width = Car.width + Car.doorLength * 2;
+    //int width = Car.width + Car.doorLength * 2;
     //Takes each cars' doors into account (doors on both sides) so that the passenger(s) can still get out of the car
-    int length = Car.length; //redudant
+    //int length = Car.length; //redudant
 
     //OBS! Currently this function has no sort of failsave, and therefore malicious input can result in
     //segmentationfaults. This is due to the fact, that this function is supposed to be run *after*
@@ -82,3 +83,4 @@ void ArrangeCar(lot **parkingLot, car Car, int x0, int y0) {
     }
     printf("\nCar has recieved adequated spot\n"); //debug
 }
+*/

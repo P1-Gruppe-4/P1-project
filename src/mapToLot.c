@@ -133,7 +133,7 @@ void mapToLot(car carUser, lot **pLot, int length, int width) {
     }
     pLot[matchL][matchW].xIndex = matchL;
     pLot[matchL][matchW].yIndex = matchW;
-
+/*
     for (int i = matchL; i < carUser.length+matchL; i++)
     {
         for (int j = matchW; j < carUser.width + matchW; j++)
@@ -141,7 +141,7 @@ void mapToLot(car carUser, lot **pLot, int length, int width) {
             pLot[i][j].status = 1;
         }
     }
-
+*/
     pLot[matchL][matchW].car = &carUser;
 
     free(matchLot);

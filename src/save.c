@@ -35,7 +35,7 @@ lot** load_save(FILE* savefile) {
         for(int j=0; j<width; j++) {
 
             //todo: fix -2 bug
-            fscanf(savefile, "%d %d-", &parkingLot[i][j].status, &parkingLot[i][j].isHandicapSpot);
+//          fscanf(savefile, "%d %d-", &parkingLot[i][j].status, &parkingLot[i][j].isHandicapSpot);
         }
     }
 
