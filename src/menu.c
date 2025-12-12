@@ -2,164 +2,180 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <ctype.h>
 #include <string.h>
 
-car create_car(){
+car create_car() {
     car newCar;
-    char handicapInput[10];   // buffer to store "Yes" / "No"
+    char handicapInput; // buffer to store "y" / "n"
 
     printf("Enter stay duration hours: ");
     scanf("%lf", &newCar.durationStay);
 
-    printf("Enter handicap, type Yes or No: ");
-    scanf("%9s", handicapInput);   // read string
+    printf("Enter handicap, type y or n: ");
+    scanf(" %c", &handicapInput); // read string
 
     // Convert string to handicap value
-    if (strcmp(handicapInput, "Yes") == 0 || strcmp(handicapInput, "yes") == 0) {
+    if (tolower(handicapInput) == 'y') {
         newCar.handicap = 1;
-    }
-    else if (strcmp(handicapInput, "No") == 0 || strcmp(handicapInput, "no") == 0) {
+    } else if (tolower(handicapInput) == 'n') {
         newCar.handicap = 0;
-    }
-    else {
-        printf("Invalid input, defaulting handicap to 0\n");
+    } else {
+        printf("Invalid input, defaulting handicap to no\n");
         newCar.handicap = 0;
     }
 
-    printf("Who is travelling in the car? 0 for Service Technician, 1 for VIP's, 2 for Guests, any key for none: ");
+    printf("Who is travelling in the car? 0 for Worker, 1 for VIP's, 2 for Guests ");
     int temp;
     scanf("%d", &temp);
-    switch (temp)
-    {
-    case '0':
-      newCar.role = temp;
-      break;
-    case '1':
-      newCar.role = temp;
-      break;  
-    case '2':
-      newCar.role = temp;
-      break;
-    default:
-        newCar.role = 2;
+    switch (temp) {
+        case 0:
+            newCar.role = Worker;
+            break;
+        case 1:
+            newCar.role = VIP;
+            break;
+        case 2:
+            newCar.role = Guest;
+            break;
+        default:
+            newCar.role = Guest;
     }
 
-    printf("If any, what passengers are in the car? 0 for Adult, 1 for Family, 2 for Elderly, any key for none: ");
+    printf("If any, what passengers are in the car? 0 for Adult, 1 for Family, 2 for Elderly ");
     scanf("%d", &temp);
-    switch (temp)
-    {
-    case '0':
-      newCar.passenger = temp;
-      break;
-    case '1':
-      newCar.passenger = temp-'0';
-      break;
-    case '2':
-      newCar.passenger = temp-'0';
-      break;
-    default:
-      newCar.passenger = 0;
+    switch (temp) {
+        case 0:
+            newCar.passenger = Adult;
+            break;
+        case 1:
+            newCar.passenger = Family;
+            break;
+        case 2:
+            newCar.passenger = Elderly;
+            break;
+        default:
+            newCar.passenger = Adult;
     }
 
-    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for other");
+    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for special");
     scanf("%d", &temp);
-    switch (temp)
-    {
-    case '0':
-        newCar.size = temp;
-        break;
-    case '1':
-        newCar.size = temp;
-        break;
-    case '2':
-        newCar.size = temp;
-        break;
-    default:
-        newCar.size = 2;
+    switch (temp) {
+        case 0:
+            newCar.size = Small;
+            break;
+        case 1:
+            newCar.size = Medium;
+            break;
+        case 2:
+            newCar.size = Large;
+            break;
+        case 3:
+            newCar.size = Special;
+            break;
+        default:
+            newCar.size = Small;
     }
-
     return newCar;
 }
 
 void create_menu() {
-    printf("Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n");
-    int input;
-    scanf("%d", &input);
-
-    if (input == 1) {
-        int length, width;
-        printf("Enter length, then width as integers: ");
-        scanf("%d %d", &length, &width);
-        assert(width > 0 && length > 0); //debug
-
-        lot** parkingLot = ArrayAlloc(length, width);
-        //ArrayFill(parkingLot, length, width); debug
-        pathCreator(parkingLot, length, width);
-        parkingLot = lotAssigner(parkingLot, length, width);
-        ArrayPrint(parkingLot, length, width);
-        //car testcar = {3, 2, 1};
-        //ArrangeCar(parkingLot, testcar, 1, 1); //is commented out to prevent temporary segmentationfaults
-        //ArrayPrint(parkingLot, length, width);
-        char c = 'y';
-
-        while (c != 'n')
-        {
-            printf("Do you wish to set cars into the lot? (y/n): ");
-            scanf(" %c", &c);
-            if (c == 'y')
-            {
-                //get car etc.
-                car new_car = create_car();
-                mapToLot(new_car, parkingLot, length, width);
-            }
-        }
-
-        auto_save(parkingLot, length, width);
-
-        free(parkingLot);
-    }
-    else if (input == 2) {
-        printf("If you want to load from autosave press 1\nIf you want to load from a different file press 2\n");
-        int input = 0;
-        char autofile[] = "autosave.txt";
-        char filename[100];
+    int done = 0;
+    int lengthLot, widthLot;
+    while (done == 0) {
+        printf(
+            "Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n If you want to exit the program press 3\n");
+        int input;
         scanf("%d", &input);
 
         switch (input) {
-            case 1:
-                    FILE* autosavefile = fopen(autofile, "r");
+            case 1: {
+                int length, width;
+                do {
+                    printf("Enter length and width: ");
+                    scanf("%d %d", &length, &width);
+                } while (length <= 0 || width <= 0);
 
-                    if (autosavefile == NULL) {
-                        printf("ERROR! No auto saves found! Redirecting to the main menu.\n\n");
-                        create_menu();
-                        break;
-                    }
-                load_save(autosavefile);
+                lot **parking_lot = ArrayAlloc(length, width);
+                //ArrayFill(parking_lot, length, width); debug
+                pathCreator(parking_lot, length, width);
+                parking_lot = lotAssigner(parking_lot, length, width);
+                ArrayPrint(parking_lot, length, width);
+                add_cars(parking_lot, length, width);
                 break;
+            }
 
             case 2: {
-                while (1) {
-                    printf("Please enter filename:\n");
-                    scanf("%99s", filename);
-                    FILE* savefile = fopen(filename, "r");
+                printf(
+                    "If you want to load from autosave press 1\nIf you want to load from a different file press 2, 0 to go back to main menu\n");
+                int loadChoice = 0;
+                char autofile[] = "autosave.txt";
+                char filename[100];
+                scanf("%d", &loadChoice);
 
-                    if (savefile == NULL) {
-                        printf("ERROR! Invalid input, try again:\n\n");
-                    }
-                    else {
-                        load_save(savefile);
+                switch (loadChoice) {
+                    case 1: {
+                        FILE *autosavefile = fopen(autofile, "r");
+
+                        if (autosavefile == NULL) {
+                            printf("ERROR! No auto saves found! Redirecting to the main menu.\n\n");
+                            break;
+                        }
+                        lot **parking_lot = load_save(autosavefile, &lengthLot, &widthLot);
+                        if (parking_lot != NULL) {
+                            add_cars(parking_lot, lengthLot, widthLot);
+                        }
                         break;
+                    }
+                    case 2: {
+                        while (1) {
+                            printf("Please enter filename:\n");
+                            scanf("%99s", filename);
+                            FILE *savefile = fopen(filename, "r");
+
+                            if (savefile == NULL) {
+                                printf("ERROR! Invalid input, try again:\n\n");
+                            } else {
+                                lot **parking_lot = load_save(savefile, &lengthLot, &widthLot);
+                                if (parking_lot != NULL) {
+                                    add_cars(parking_lot, lengthLot, widthLot);
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 0: {
+                        break;
+                    }
+                    default: {
+                        printf("ERROR! Invalid input, redirecting to the main menu.\n\n");
                     }
                 }
                 break;
             }
-            default:
+            case 3: {
+                done = 1;
+                break;
+            }
+            default: {
                 printf("ERROR! Invalid input, redirecting to the main menu.\n\n");
-                create_menu();
+            }
         }
     }
-    else {
-        printf("ERROR! Invalid input, try again:\n\n");
-        create_menu();
+}
+
+// Helper function to add cars to the loaded array
+void add_cars(lot **parking_lot, int length, int width) {
+    char c = 'y';
+    while (tolower(c) != 'n') {
+        printf("Do you wish to set cars into the lot? (y/n): ");
+        scanf(" %c", &c);
+        if (tolower(c) == 'y') {
+            car new_car = create_car();
+            mapToLot(new_car, parking_lot, length, width);
+        }
     }
+    auto_save(parking_lot, length, width);
+    ArrayFree(parking_lot, length);
 }

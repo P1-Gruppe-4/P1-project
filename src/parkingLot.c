@@ -22,18 +22,21 @@ lot **pathCreator(lot **parkingLot, int length, int width) {
         for (int j = 0; j < width; j++) {
             //Initializing all spots as 0 and then just overrwriting the necessarry ones
             parkingLot[i][j].status = Status_Free;
-            if (i % 7 == 0 || i % 7 == 1 || i % 7 == 2) {
+            if (i % 3 == 0) {
                 parkingLot[i][j].status = Status_Path;
             }
-            if (j == width - 1 || j == width - 2 || j == width - 3) {
+            if (j == width - 1) {
                 if (i != 0 && i != length - 1) {
                     parkingLot[i][j].status = Status_Path;
                 } else if (i == 0) {
                     parkingLot[i][j].status = Status_Entrance; // status for entrance
                 } else if (i == length - 1) {
                     parkingLot[i][j].status = Status_Exit; // status for exit
+                }
             }
-          }
+            parkingLot[i][j].hasCar = 0;
+            parkingLot[i][j].spotWidth = 1.0;
+            parkingLot[i][j].spotLength = 1.0;
         }
     }
     return parkingLot;
@@ -51,8 +54,8 @@ lot **lotAssigner(lot **parkingLot, int length, int width) {
         //i & j loops tru whole parking lot
         for (int j = 0; j < width; j++) {
             if (parkingLot[i][j].status == Status_Free) {
-                parkingLot[i][j].xIndex = i;
-                parkingLot[i][j].yIndex = j;
+                parkingLot[i][j].row = i;
+                parkingLot[i][j].col = j;
                 parkingLot[i][j].distance = abs(entRow - i) + abs(entCol - j);
                 totalSpotsFree++;
             }
@@ -76,7 +79,7 @@ lot **lotAssigner(lot **parkingLot, int length, int width) {
             if (parkingLot[i][j].status == Status_Free) {
                 lotTemp[k] = parkingLot[i][j];
                 k++;
-          }
+            }
         }
     }
 
@@ -90,20 +93,32 @@ lot **lotAssigner(lot **parkingLot, int length, int width) {
         LONG_STAY_HOURS // index 2
     };
 
-    carSize sizeOptions[3] = {
-        Small,   // 0
-        Medium,  // 1
-        Big      // 2
+    carSize sizeOptions[4] = {
+        Small, // 0
+        Medium, // 1
+        Large, // 2
+        Special // 3
     };
 
+    int parking_row_index[length];
+    int parking_row = 0;
+    for (int i = 0; i < length; i++) {
+        if (i%3 != 0) {
+            parking_row_index[i] = parking_row;
+            parking_row++;
+        } else {
+            parking_row_index[i] = -1;
+        }
+    }
 
     for (int i = 0; i < totalSpotsFree; i++) {
         lotTemp[i].isHandicapSpot = 0;
         lotTemp[i].allowedRole = Guest;
         lotTemp[i].preferredPassenger = Adult;
         lotTemp[i].maxDuration = durationOptions[i % 3];
-        lotTemp[i].maxSize = sizeOptions[i % 3];
-        lotTemp[i].car = NULL;
+        int r = lotTemp[i].row; //Row which i is on
+        int index = parking_row_index[r];
+        lotTemp[i].maxSize = sizeOptions[index % 4]; // One row of each size
         if (i < handicapSpots) {
             lotTemp[i].isHandicapSpot = 1;
         } else if (i < handicapSpots + vipSpots) {
@@ -119,7 +134,7 @@ lot **lotAssigner(lot **parkingLot, int length, int width) {
     }
 
     for (int i = 0; i < totalSpotsFree; i++) {
-        parkingLot[lotTemp[i].xIndex][lotTemp[i].yIndex] = lotTemp[i];
+        parkingLot[lotTemp[i].row][lotTemp[i].col] = lotTemp[i];
     }
 
     free(lotTemp);

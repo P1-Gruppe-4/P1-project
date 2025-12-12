@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 //Function to check if car and parkingspot match on handicap parameter
@@ -31,13 +30,14 @@ int isRole(lot lot, roleVenue role) {
 }
 
 //Function to filter away all the spots that do not match the car on the parameters role, handicap and type, and to return a dynamic array with ones that fit
-lot *filterSpots(car carUser, lot **pLot, int length, int width, int *matches) {
+lot *filterSpots(car carUser, lot **parking_lot, int length, int width, int *matches) {
     int count = 0;
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
-            if (pLot[i][j].status == 0) {
-                if (isHandicap(pLot[i][j], carUser.handicap) == 1 && isType(pLot[i][j], carUser.size) == 1 && isRole(
-                        pLot[i][j], carUser.role) == 1) {
+            if (parking_lot[i][j].status == Status_Free && parking_lot[i][j].hasCar == 0) {
+                if (isHandicap(parking_lot[i][j], carUser.handicap) == 1 && isType(parking_lot[i][j], carUser.size) == 1
+                    && isRole(
+                        parking_lot[i][j], carUser.role) == 1) {
                     count++;
                 }
             }
@@ -48,17 +48,19 @@ lot *filterSpots(car carUser, lot **pLot, int length, int width, int *matches) {
         return NULL;
     }
     lot *result = malloc(sizeof(lot) * count);
-    if (result == NULL) {        // malloc fails
-        *matches = 0;            // if malloc fails then there are no matches to work with
+    if (result == NULL) {
+        // malloc fails
+        *matches = 0; // if malloc fails then there are no matches to work with
         return NULL;
     }
     int count2 = 0;
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
-            if (pLot[i][j].status == 0) {
-                if (isHandicap(pLot[i][j], carUser.handicap) == 1 && isType(pLot[i][j], carUser.size) == 1 && isRole(
-                        pLot[i][j], carUser.role) == 1) {
-                    result[count2] = pLot[i][j];
+            if (parking_lot[i][j].status == Status_Free && parking_lot[i][j].hasCar == 0) {
+                if (isHandicap(parking_lot[i][j], carUser.handicap) == 1 && isType(parking_lot[i][j], carUser.size) == 1
+                    && isRole(
+                        parking_lot[i][j], carUser.role) == 1) {
+                    result[count2] = parking_lot[i][j];
                     count2++;
                 }
             }
@@ -91,10 +93,12 @@ double durationScore(lot *l, car c) {
 double passengerScore(lot *l, car c) {
     int val = c.passenger - l->preferredPassenger;
     if (val == 0) {
-        return 1;
-    } else if (val == 1) {
+        return 1.0;
+    } else if (val == 1 || val == -1) {
         return 0.5;
-    } else return 0;
+    } else {
+        return 0.0;
+    }
 }
 
 //Function to calculate the score the spot gets
@@ -103,7 +107,7 @@ double calcScore(double passengerScore, double durationScore) {
 }
 
 //Function that maps car to the parking spot that fits it best, and sets it as taken by the specific car
-void mapToLot(car carUser, lot **pLot, int length, int width) {
+void mapToLot(car carUser, lot **parking_lot, int length, int width) {
     int matches = 0;
     double matchScore = 0;
     double maxMatchScore = -1;
@@ -112,9 +116,9 @@ void mapToLot(car carUser, lot **pLot, int length, int width) {
     int matchL = 0;
     int matchW = 0;
 
-    lot *matchLot = filterSpots(carUser, pLot, length, width, &matches);
+    lot *matchLot = filterSpots(carUser, parking_lot, length, width, &matches);
     //Stops function if no matches or matchLot is empty
-    if (matches==0||matchLot==NULL) {
+    if (matches == 0 || matchLot == NULL) {
         printf("No parking space matches your car\n");
         free(matchLot);
         return;
@@ -127,22 +131,15 @@ void mapToLot(car carUser, lot **pLot, int length, int width) {
         matchScore = calcScore(pScore, dScore);
         if (matchScore > maxMatchScore) {
             maxMatchScore = matchScore;
-            matchL = matchLot[i].xIndex;
-            matchW = matchLot[i].yIndex;
+            matchL = matchLot[i].row;
+            matchW = matchLot[i].col;
         }
     }
-    pLot[matchL][matchW].xIndex = matchL;
-    pLot[matchL][matchW].yIndex = matchW;
-/*
-    for (int i = matchL; i < carUser.length+matchL; i++)
-    {
-        for (int j = matchW; j < carUser.width + matchW; j++)
-        {
-            pLot[i][j].status = 1;
-        }
-    }
-*/
-    pLot[matchL][matchW].car = &carUser;
+    parking_lot[matchL][matchW].row = matchL;
+    parking_lot[matchL][matchW].col = matchW;
+    parking_lot[matchL][matchW].currentCar = carUser;
+    parking_lot[matchL][matchW].hasCar = 1;
+    parking_lot[matchL][matchW].status = Status_Reserved;
 
     free(matchLot);
 }
