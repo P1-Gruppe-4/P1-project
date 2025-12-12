@@ -54,6 +54,8 @@ void auto_save(lot **parking_lot, int length, int width) {
 lot **load_save(FILE *savefile, int *length, int *width) {
     int lengthArr, widthArr;
     fscanf(savefile, "%d %d", &lengthArr, &widthArr);
+    *length = lengthArr;
+    *width = widthArr;
 
     lot **parking_lot = ArrayAlloc(lengthArr, widthArr);
     for (int i = 0; i < lengthArr; i++) {

@@ -81,7 +81,7 @@ car create_car() {
 
 void create_menu() {
     int done = 0;
-    int lengthLot, widthLot;
+    int lengthLot, widthLot = 0;
     while (done == 0) {
         printf(
             "Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n If you want to exit the program press 3\n");
