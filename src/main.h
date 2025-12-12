@@ -14,7 +14,7 @@ typedef enum {
     Adult,
     Family,
     Elderly
-} passengerType;
+} passenger_type;
 
 //Enum for the different type of status which the individual lot can have
 typedef enum {
@@ -23,7 +23,7 @@ typedef enum {
     Status_Path,
     Status_Entrance,
     Status_Exit
-} LotStatus;
+} lot_status;
 
 //Enum for the different type of car sizes
 typedef enum {
@@ -31,54 +31,52 @@ typedef enum {
     Medium,
     Large,
     Special
-} carSize;
+} car_size;
 
 //Enum for different types of roles at the venue
 typedef enum {
     Worker,
     VIP,
     Guest
-} roleVenue;
-
+} role_venue;
 
 //Structs that will be used in the project
-
 typedef struct car {
     // Whether the car is with handicapped passengers 0 for no, 1 for yes
     int handicap;
     // The duration which the drivers wish to stay at the venue
-    double durationStay;
+    double duration_stay;
     // The size of the car
-    carSize size;
+    car_size size;
     // The types of passengers e.g. family with children or elderly
-    passengerType passenger;
+    passenger_type passenger;
     // The role of the passengers at the venue
-    roleVenue role;
+    role_venue role;
 } car;
 
 typedef struct lot {
     //Whether the cell is Free, Reserved, Path, Entrance or Exit
-    LotStatus status;
+    lot_status status;
 
     //Whether spot is for handicap 0 for no, 1 for yes
-    int isHandicapSpot;
+    int is_handicap_spot;
     // double for hours of max duration to stay on specific spot
-    double maxDuration;
+    double max_duration;
     //The carsize which the spot is made for
-    carSize maxSize;
+    car_size max_size;
     //The preffered type of passenger the spot is made for e.g. elderly or families with children
-    passengerType preferredPassenger;
+    passenger_type preferred_passenger;
     //The role which the spot is made for e.g. VIP, guest or worker
-    roleVenue allowedRole;
+    role_venue allowed_role;
 
     // Length and width of the spot, not used in logical model
-    double spotWidth;
-    double spotLength;
+    double spot_width;
+    double spot_length;
 
     // If there is a car in the spot 0 if no 1 if yes
-    int hasCar;
+    int has_car;
     // The car that is in the spot if hasCar is 1
-    car currentCar;
+    car current_car;
 
     //Positions in grid and distance to entrance
     int distance;
@@ -87,45 +85,45 @@ typedef struct lot {
 } lot;
 
 //prototypes from arrays.c
-lot **ArrayAlloc(int length, int width);
+lot **array_alloc(int length, int width);
 
-lot **ArrayFill(lot **pointer, int length, int width);
+lot **array_fill(lot **pointer, int length, int width);
 
-void ArrayFree(lot **pointer, int length);
+void array_free(lot **pointer, int length);
 
-void ArrayPrint(lot **pointer, int length, int width);
+void array_print(lot **pointer, int length, int width);
 
 
 //void ArrayFree(lot** pointer, int length, int width);
-void ArrangeCar(lot **parkingLot, car Car, int x0, int y0);
+void arrange_car(lot **parking_lot, car Car, int x0, int y0);
 
 //prototypes from menu.c
 void create_menu();
-void add_cars(lot **parkingLot, int length, int width);
+void add_cars(lot **parking_lot, int length, int width);
 
 //prototypes from save.c
 void auto_save(lot **pointer, int length, int width);
 
-lot **load_save(FILE *savefile, int *length, int *width);
+lot **load_save(FILE *save_file, int *length, int *width);
 
 //prototypes from mapToLot.c
-int isHandicap(lot lot, int carHand);
-int isType(lot lot, carSize size);
-int isRole(lot lot, roleVenue role);
+int is_handicap(lot lot, int car_hand);
+int is_type(lot lot, car_size size);
+int is_role(lot lot, role_venue role);
 
-lot *filterSpots(car carUser, lot **pLot, int length, int width, int *matches);
+lot *filter_spots(car car_user, lot **p_lot, int length, int width, int *matches);
 
-double durationScore(lot *l, car c);
-double passengerScore(lot *l, car c);
-double calcScore(double passengerScore, double durationScore);
+double duration_score(lot *l, car c);
+double passenger_score(lot *l, car c);
+double calc_score(double passengerScore, double durationScore);
 
-void mapToLot(car carUser, lot **pLot, int length, int width);
+void map_to_lot(car car_user, lot **p_lot, int length, int width);
 
 
-//prototypes fra parkingLot.c
+//prototypes fra parking_lot.c
 int comp(const void *a, const void *b);
-void sortPark(lot parkingArr[], int last, int (*fptr)(const void *, const void *));
-lot **lotAssigner(lot **parkingLot, int length, int width);
-lot **pathCreator(lot **parkingLot, int length, int width);
+void sort_park(lot parking_arr[], int last, int (*fptr)(const void *, const void *));
+lot **lot_assigner(lot **parking_lot, int length, int width);
+lot **path_creator(lot **parking_lot, int length, int width);
 
 #endif //P1_GRUPPE4_MAIN_H

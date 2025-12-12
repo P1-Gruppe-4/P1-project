@@ -6,11 +6,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include "main.h"
 
 // Function that dynamically allocates a two dimensional array for the parkinglot
-lot **ArrayAlloc(int length, int width) {
+lot **array_alloc(int length, int width) {
     lot **parking_lot = malloc(sizeof(*parking_lot) * (size_t) length);
 
     for (size_t i = 0; i < (size_t) length; i++) {
@@ -21,7 +20,7 @@ lot **ArrayAlloc(int length, int width) {
 }
 
 // Function that sets status to free for all elements in array
-lot **ArrayFill(lot **parking_lot, int length, int width) {
+lot **array_fill(lot **parking_lot, int length, int width) {
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
             parking_lot[i][j].status = Status_Free;
@@ -32,7 +31,7 @@ lot **ArrayFill(lot **parking_lot, int length, int width) {
 }
 
 // Function that frees the dynamically allocated array
-void ArrayFree(lot **parking_lot, int length) {
+void array_free(lot **parking_lot, int length) {
     for (int i = 0; i < length; i++) {
         free(parking_lot[i]);
     }
@@ -41,7 +40,7 @@ void ArrayFree(lot **parking_lot, int length) {
 
 //This functions print out the parkingLot array in a 2d grid. It is not necessarily suited for the later, user-interface
 //of our application and should maybe rather only be used for inital debugging purposes
-void ArrayPrint(lot **parking_lot, int length, int width) {
+void array_print(lot **parking_lot, int length, int width) {
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
             if (parking_lot[i][j].status == 0) {
@@ -49,9 +48,6 @@ void ArrayPrint(lot **parking_lot, int length, int width) {
             } else {
                 printf("[%d]", parking_lot[i][j].status);
             }
-
-
-            //printf("[Status: %d  Handicap: %d] ", parking_lot[i][j].status, parking_lot[i][j].handicap);
         }
         printf("\n");
     }

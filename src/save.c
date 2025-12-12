@@ -25,23 +25,23 @@ void auto_save(lot **parking_lot, int length, int width) {
             fprintf(auto_save,
                     "%d %d %lf %d %d %d %lf %lf %d %d %d %d",
                     parking_lot[i][j].status,
-                    parking_lot[i][j].isHandicapSpot,
-                    parking_lot[i][j].maxDuration,
-                    parking_lot[i][j].maxSize,
-                    parking_lot[i][j].preferredPassenger,
-                    parking_lot[i][j].allowedRole,
-                    parking_lot[i][j].spotWidth,
-                    parking_lot[i][j].spotLength,
-                    parking_lot[i][j].hasCar,
+                    parking_lot[i][j].is_handicap_spot,
+                    parking_lot[i][j].max_duration,
+                    parking_lot[i][j].max_size,
+                    parking_lot[i][j].preferred_passenger,
+                    parking_lot[i][j].allowed_role,
+                    parking_lot[i][j].spot_width,
+                    parking_lot[i][j].spot_length,
+                    parking_lot[i][j].has_car,
                     parking_lot[i][j].distance,
                     parking_lot[i][j].row,
                     parking_lot[i][j].col
             );
             //If it has a car, the car is also saved
-            if (parking_lot[i][j].hasCar == 1) {
-                fprintf(auto_save, " %lf %d %d %d %d", parking_lot[i][j].currentCar.durationStay,
-                        parking_lot[i][j].currentCar.handicap, parking_lot[i][j].currentCar.passenger,
-                        parking_lot[i][j].currentCar.role, parking_lot[i][j].currentCar.size);
+            if (parking_lot[i][j].has_car == 1) {
+                fprintf(auto_save, " %lf %d %d %d %d", parking_lot[i][j].current_car.duration_stay,
+                        parking_lot[i][j].current_car.handicap, parking_lot[i][j].current_car.passenger,
+                        parking_lot[i][j].current_car.role, parking_lot[i][j].current_car.size);
             }
             fprintf(auto_save, "\n");
         }
@@ -50,39 +50,39 @@ void auto_save(lot **parking_lot, int length, int width) {
     printf("Autosave completed, saved to %s\n", "autosave.txt"); //debug
 }
 
-//This function extracts saved data in the correct format from the provided savefile
-lot **load_save(FILE *savefile, int *length, int *width) {
-    int lengthArr, widthArr;
-    fscanf(savefile, "%d %d", &lengthArr, &widthArr);
-    *length = lengthArr;
-    *width = widthArr;
+//This function extracts saved data in the correct format from the provided save_file
+lot **load_save(FILE *save_file, int *length, int *width) {
+    int length_arr, width_arr;
+    fscanf(save_file, "%d %d", &length_arr, &width_arr);
+    *length = length_arr;
+    *width = width_arr;
 
-    lot **parking_lot = ArrayAlloc(lengthArr, widthArr);
-    for (int i = 0; i < lengthArr; i++) {
-        for (int j = 0; j < widthArr; j++) {
-            fscanf(savefile,
+    lot **parking_lot = array_alloc(length_arr, width_arr);
+    for (int i = 0; i < length_arr; i++) {
+        for (int j = 0; j < width_arr; j++) {
+            fscanf(save_file,
                      "%d %d %lf %d %d %d %lf %lf %d %d %d %d",
                      &parking_lot[i][j].status,
-                     &parking_lot[i][j].isHandicapSpot,
-                     &parking_lot[i][j].maxDuration,
-                     &parking_lot[i][j].maxSize,
-                     &parking_lot[i][j].preferredPassenger,
-                     &parking_lot[i][j].allowedRole,
-                     &parking_lot[i][j].spotWidth,
-                     &parking_lot[i][j].spotLength,
-                     &parking_lot[i][j].hasCar,
+                     &parking_lot[i][j].is_handicap_spot,
+                     &parking_lot[i][j].max_duration,
+                     &parking_lot[i][j].max_size,
+                     &parking_lot[i][j].preferred_passenger,
+                     &parking_lot[i][j].allowed_role,
+                     &parking_lot[i][j].spot_width,
+                     &parking_lot[i][j].spot_length,
+                     &parking_lot[i][j].has_car,
                      &parking_lot[i][j].distance,
                      &parking_lot[i][j].row,
                      &parking_lot[i][j].col
              );
-            if (parking_lot[i][j].hasCar == 1) {
-                fscanf(savefile, " %lf %d %d %d %d", &parking_lot[i][j].currentCar.durationStay,
-                       &parking_lot[i][j].currentCar.handicap, &parking_lot[i][j].currentCar.passenger,
-                       &parking_lot[i][j].currentCar.role, &parking_lot[i][j].currentCar.size);
+            if (parking_lot[i][j].has_car == 1) {
+                fscanf(save_file, " %lf %d %d %d %d", &parking_lot[i][j].current_car.duration_stay,
+                       &parking_lot[i][j].current_car.handicap, &parking_lot[i][j].current_car.passenger,
+                       &parking_lot[i][j].current_car.role, &parking_lot[i][j].current_car.size);
             }
         }
     }
-    fclose(savefile);
-    ArrayPrint(parking_lot, lengthArr, widthArr);
+    fclose(save_file);
+    array_print(parking_lot, length_arr, width_arr);
     return parking_lot;
 }
