@@ -181,7 +181,7 @@ void lot_menu(lot **parking_lot, int length, int width) {
             scanf("%15s", plate_number);
             int result = find_car_by_numberplate(parking_lot, length, width, plate_number, &r, &c);
             if (result == 1) {
-                printf("The car with the numberplate %s is found at row %d and column %d", plate_number, r, c);
+                printf("The car with the numberplate %s is found at row %d and column %d\n", plate_number, r, c);
             } else {
                 printf("The car with the numberplate %s is not in the parkinglot\n", plate_number);
             }
