@@ -26,8 +26,7 @@ typedef enum {
 typedef enum {
     Small,
     Medium,
-    Large,
-    Special
+    Large
 } car_size;
 
 //Enum for different types of roles at the venue

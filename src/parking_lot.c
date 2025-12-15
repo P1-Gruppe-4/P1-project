@@ -81,11 +81,10 @@ lot **lot_assigner(lot **parking_lot, int length, int width) {
         LONG_STAY_HOURS // index 2
     };
 
-    car_size size_options[4] = {
+    car_size size_options[3] = {
         Small, // 0
         Medium, // 1
-        Large, // 2
-        Special // 3
+        Large // 2
     };
 
     int parking_row_index[length];
@@ -106,7 +105,7 @@ lot **lot_assigner(lot **parking_lot, int length, int width) {
         lot_temp[i].max_duration = duration_options[i % 3];
         int r = lot_temp[i].row; //Row which i is on
         int index = parking_row_index[r];
-        lot_temp[i].max_size = size_options[index % 4]; // One row of each size
+        lot_temp[i].max_size = size_options[index % 3]; // One row of each size
         if (i < handicap_spots) {
             lot_temp[i].is_handicap_spot = 1;
         } else if (i < handicap_spots + vip_spots) {

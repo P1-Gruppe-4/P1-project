@@ -54,7 +54,7 @@ car create_car() {
             newCar.passenger = Adult;
     }
 
-    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for special\n");
+    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large\n");
     scanf("%d", &temp);
     switch (temp) {
         case 0:
@@ -65,9 +65,6 @@ car create_car() {
             break;
         case 2:
             newCar.size = Large;
-            break;
-        case 3:
-            newCar.size = Special;
             break;
         default:
             newCar.size = Small;

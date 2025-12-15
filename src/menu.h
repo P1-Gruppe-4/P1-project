@@ -18,5 +18,6 @@
 void main_menu();
 void lot_menu(lot **parking_lot, int length, int width) ;
 void add_cars(lot **parking_lot, int length, int width);
+car create_car();
 
 #endif //P1_GRUPPE4_MENU_H
