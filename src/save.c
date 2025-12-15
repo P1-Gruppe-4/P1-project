@@ -45,7 +45,7 @@ void auto_save(lot **parking_lot, int length, int width) {
         }
     }
     fclose(auto_save);
-    printf("Autosave completed, saved to %s\n", "autosave.txt"); //debug
+    printf("Save completed, saved to %s\n", "autosave.txt"); //debug
 }
 
 //This function extracts saved data in the correct format from the provided save_file

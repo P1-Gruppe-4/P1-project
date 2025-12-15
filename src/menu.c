@@ -1,6 +1,5 @@
-#include "main.h"
-#include <stdio.h>
-#include <ctype.h>
+#include <menu.h>
+
 
 car create_car() {
     car newCar;
@@ -84,7 +83,7 @@ void main_menu() {
     int length_lot = 0, width_lot = 0;
     while (done == 0) {
         printf(
-            "Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2 \n If you want to exit the program press 3\n  ");
+            "Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2 \nIf you want to exit the program press 3\n  ");
         int input;
         scanf("%d", &input);
 
@@ -169,7 +168,7 @@ void lot_menu(lot **parking_lot, int length, int width) {
     int choice = 0;
     while (choice != 5) {
         printf(
-            "Press 1 to add car \n Press 2 to find car \n Press 3 to delete car \n Press 4 to print parkinglot \n Press 5 to save & go back to menu\n");
+            "Press 1 to add car \nPress 2 to find car\nPress 3 to delete car\nPress 4 to print parkinglot\nPress 5 to save & go back to menu\n");
         scanf("%d", &choice);
 
         if (choice == 1 && parking_lot != NULL) {

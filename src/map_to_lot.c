@@ -1,5 +1,5 @@
-#include "main.h"
-#include <stdlib.h>
+#include <map_to_lot.h>
+
 
 //Function to check if car and parkingspot match on handicap parameter
 int is_handicap(lot lot, int car_hand) {

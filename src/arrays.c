@@ -4,9 +4,8 @@
  * Da jeg havde problemer med at få allocationen af arena arrayet til at virke. Jeg har blot afproevet og aendret koden, saaledes, at den passer til projektet
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "main.h"
+// Include headerfile
+#include <arrays.h>
 
 // Function that dynamically allocates a two dimensional array for the parkinglot
 lot **array_alloc(int length, int width) {

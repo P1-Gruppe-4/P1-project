@@ -1,17 +1,5 @@
-#include <stdio.h>
-#include "main.h"
-#include <stdlib.h>
+#include <parking_lot.h>
 
-#define HANDICAP_RATIO 0.08   // 8% handicap-pladser
-#define FAMILY_RATIO   0.10   // 10% pladser til familier (børn)
-#define ELDERLY_RATIO  0.07   // 7% pladser til ældre
-
-#define SHORT_STAY_HOURS  1.0
-#define MEDIUM_STAY_HOURS 4.0
-#define LONG_STAY_HOURS   8.0
-
-#define VIP_SPOTS 0.03
-#define WORKER_SPOTS 0.02
 
 
 //prints the paths of the parking lot layout

@@ -7,11 +7,11 @@ include_directories(src)
 
 add_executable(P1_gruppe4
         src/main.c
-        src/main.h
+        src/types.h
         src/arrays.c
         src/menu.c
         src/save.c
-        src/mapToLot.c
-        src/parkingLot.c
+        src/map_to_lot.c
+        src/parking_lot.c
         src/find.c
         src/delete.c)
