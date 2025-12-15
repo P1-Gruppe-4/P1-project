@@ -55,7 +55,7 @@ car create_car() {
             newCar.passenger = Adult;
     }
 
-    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for special");
+    printf("How big is your Car?: 0 for Small, 1 for Medium, 2 for Large, 3 for special\n");
     scanf("%d", &temp);
     switch (temp) {
         case 0:
@@ -73,15 +73,18 @@ car create_car() {
         default:
             newCar.size = Small;
     }
+    printf("Enter the numberplate of your car like this: AC12842\n");
+    scanf("%15s", newCar.number_plate);
+
     return newCar;
 }
 
-void create_menu() {
+void main_menu() {
     int done = 0;
-    int length_lot, width_lot = 0;
+    int length_lot = 0, width_lot = 0;
     while (done == 0) {
         printf(
-            "Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2\n If you want to exit the program press 3\n");
+            "Welcome to Lotimizer2D\n----------------------\nIf you want to create a new lot press 1\nIf you want to load from file press 2 \n If you want to exit the program press 3\n  ");
         int input;
         scanf("%d", &input);
 
@@ -96,8 +99,7 @@ void create_menu() {
                 lot **parking_lot = array_alloc(length, width);
                 path_creator(parking_lot, length, width);
                 parking_lot = lot_assigner(parking_lot, length, width);
-                array_print(parking_lot, length, width);
-                add_cars(parking_lot, length, width);
+                lot_menu(parking_lot, length, width);
                 break;
             }
 
@@ -119,8 +121,9 @@ void create_menu() {
                         }
                         lot **parking_lot = load_save(auto_save_file, &length_lot, &width_lot);
                         if (parking_lot != NULL) {
-                            add_cars(parking_lot, length_lot, width_lot);
+                            lot_menu(parking_lot, length_lot, width_lot);
                         }
+
                         break;
                     }
                     case 2: {
@@ -134,8 +137,9 @@ void create_menu() {
                             } else {
                                 lot **parking_lot = load_save(save_file, &length_lot, &width_lot);
                                 if (parking_lot != NULL) {
-                                    add_cars(parking_lot, length_lot, width_lot);
+                                    lot_menu(parking_lot, length_lot, width_lot);
                                 }
+
                                 break;
                             }
                         }
@@ -161,17 +165,55 @@ void create_menu() {
     }
 }
 
+void lot_menu(lot **parking_lot, int length, int width) {
+    int choice = 0;
+    while (choice != 5) {
+        printf(
+            "Press 1 to add car \n Press 2 to find car \n Press 3 to delete car \n Press 4 to print parkinglot \n Press 5 to save & go back to menu\n");
+        scanf("%d", &choice);
+
+        if (choice == 1 && parking_lot != NULL) {
+            add_cars(parking_lot, length, width);
+        } else if (choice == 2) {
+            int r, c;
+            char plate_number[16];
+            printf("Enter the plate number of the car you wanna find\n");
+            scanf("%15s", plate_number);
+            int result = find_car_by_numberplate(parking_lot, length, width, plate_number, &r, &c);
+            if (result == 1) {
+                printf("The car with the numberplate %s is found at row %d and column %d", plate_number, r, c);
+            } else {
+                printf("The car with the numberplate %s is not in the parkinglot\n", plate_number);
+            }
+        } else if (choice == 3) {
+            char plate_number[16];
+            printf("Enter the plate number of the car you wanna delete\n");
+            scanf("%15s", plate_number);
+            int result = delete_car(parking_lot, length, width, plate_number);
+            if (result == 1) {
+                printf("The car with the numberplate %s has left the parkinglot\n", plate_number);
+            } else {
+                printf("The car with the numberplate %s was not in the parkinglot in the first place\n", plate_number);
+            }
+        } else if (choice == 4) {
+            array_print(parking_lot, length, width);
+        } else if (choice == 5) {
+            auto_save(parking_lot, length, width);
+            array_free(parking_lot, length);
+            return;
+        }
+    }
+}
+
 // Helper function to add cars to the loaded array
 void add_cars(lot **parking_lot, int length, int width) {
     char c = 'y';
     while (tolower(c) != 'n') {
-        printf("Do you wish to set cars into the lot? (y/n): ");
+        printf("Do you wish to set cars into the lot? (y/n): \n");
         scanf(" %c", &c);
         if (tolower(c) == 'y') {
             car new_car = create_car();
             map_to_lot(new_car, parking_lot, length, width);
         }
     }
-    auto_save(parking_lot, length, width);
-    array_free(parking_lot, length);
 }

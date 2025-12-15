@@ -1,7 +1,5 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
 
 /*This function extracts the current parking-lot data and writes it into an autosave.txt file
  *Doing this ensure that there is always at least one fallback save for the user.
@@ -39,9 +37,9 @@ void auto_save(lot **parking_lot, int length, int width) {
             );
             //If it has a car, the car is also saved
             if (parking_lot[i][j].has_car == 1) {
-                fprintf(auto_save, " %lf %d %d %d %d", parking_lot[i][j].current_car.duration_stay,
+                fprintf(auto_save, " %lf %d %d %d %d %s", parking_lot[i][j].current_car.duration_stay,
                         parking_lot[i][j].current_car.handicap, parking_lot[i][j].current_car.passenger,
-                        parking_lot[i][j].current_car.role, parking_lot[i][j].current_car.size);
+                        parking_lot[i][j].current_car.role, parking_lot[i][j].current_car.size, parking_lot[i][j].current_car.number_plate);
             }
             fprintf(auto_save, "\n");
         }
@@ -76,9 +74,9 @@ lot **load_save(FILE *save_file, int *length, int *width) {
                      &parking_lot[i][j].col
              );
             if (parking_lot[i][j].has_car == 1) {
-                fscanf(save_file, " %lf %d %d %d %d", &parking_lot[i][j].current_car.duration_stay,
+                fscanf(save_file, " %lf %d %d %d %d %s", &parking_lot[i][j].current_car.duration_stay,
                        &parking_lot[i][j].current_car.handicap, &parking_lot[i][j].current_car.passenger,
-                       &parking_lot[i][j].current_car.role, &parking_lot[i][j].current_car.size);
+                       &parking_lot[i][j].current_car.role, &parking_lot[i][j].current_car.size, parking_lot[i][j].current_car.number_plate);
             }
         }
     }

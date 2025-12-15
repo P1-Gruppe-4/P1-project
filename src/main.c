@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 "\n"
 );
 
-    create_menu();
+    main_menu();
     return 0;
 }
 

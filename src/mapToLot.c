@@ -105,7 +105,7 @@ double calc_score(double passenger_score, double duration_score) {
 }
 
 //Function that maps car to the parking spot that fits it best, and sets it as taken by the specific car
-void mapToLot(car car_user, lot **parking_lot, int length, int width) {
+void map_to_lot(car car_user, lot **parking_lot, int length, int width) {
     int matches = 0;
     double match_score = 0;
     double max_match_score = -1;

@@ -52,6 +52,9 @@ typedef struct car {
     passenger_type passenger;
     // The role of the passengers at the venue
     role_venue role;
+
+    // The plate number of the car
+    char number_plate[16];
 } car;
 
 typedef struct lot {
@@ -98,7 +101,8 @@ void array_print(lot **pointer, int length, int width);
 void arrange_car(lot **parking_lot, car Car, int x0, int y0);
 
 //prototypes from menu.c
-void create_menu();
+void main_menu();
+void lot_menu(lot **parking_lot, int length, int width) ;
 void add_cars(lot **parking_lot, int length, int width);
 
 //prototypes from save.c
@@ -125,5 +129,11 @@ int comp(const void *a, const void *b);
 void sort_park(lot parking_arr[], int last, int (*fptr)(const void *, const void *));
 lot **lot_assigner(lot **parking_lot, int length, int width);
 lot **path_creator(lot **parking_lot, int length, int width);
+
+//prototypes from find.c
+int find_car_by_numberplate(lot **parking_lot, int length, int width, char *number_plate, int *loc_row, int *loc_col);
+
+//prototypes from delete.c
+int delete_car(lot **parking_lot, int length, int width, char *number_plate);
 
 #endif //P1_GRUPPE4_MAIN_H
