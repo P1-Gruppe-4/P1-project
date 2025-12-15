@@ -6,8 +6,8 @@
 #define P1_GRUPPE4_MAP_TO_LOT_H
 
 #include <stdlib.h>
-#include <types.h>
 #include <stdio.h>
+#include "types.h"
 
 
 int is_handicap(lot lot, int car_hand);

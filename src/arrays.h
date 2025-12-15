@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <types.h>
+#include "types.h"
 
 
 //prototypes from arrays.c

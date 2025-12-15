@@ -7,13 +7,13 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include <types.h>
-#include <save.h>
-#include <arrays.h>
-#include <parking_lot.h>
-#include <map_to_lot.h>
-#include <delete.h>
-#include <find.h>
+#include "types.h"
+#include "save.h"
+#include "arrays.h"
+#include "parking_lot.h"
+#include "map_to_lot.h"
+#include "delete.h"
+#include "find.h"
 
 void main_menu();
 void lot_menu(lot **parking_lot, int length, int width) ;

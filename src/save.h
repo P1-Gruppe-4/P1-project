@@ -5,6 +5,9 @@
 #ifndef P1_GRUPPE4_SAVE_H
 #define P1_GRUPPE4_SAVE_H
 
+#include <stdio.h>
+#include "types.h"
+
 void auto_save(lot **pointer, int length, int width);
 lot **load_save(FILE *save_file, int *length, int *width);
 

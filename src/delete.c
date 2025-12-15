@@ -1,4 +1,4 @@
-#include <delete.h>
+#include "delete.h"
 
 //Function for deleting a car in the parkinglot based on numberplate
 int delete_car(lot **parking_lot, int length, int width, char *number_plate) {

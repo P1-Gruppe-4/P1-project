@@ -1,5 +1,4 @@
-#include "main.h"
-#include <stdio.h>
+#include "save.h"
 
 /*This function extracts the current parking-lot data and writes it into an autosave.txt file
  *Doing this ensure that there is always at least one fallback save for the user.

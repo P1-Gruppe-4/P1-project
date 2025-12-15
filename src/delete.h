@@ -6,7 +6,7 @@
 #define P1_GRUPPE4_DELETE_H
 
 #include <types.h>
-#include <find.h>
+#include "find.h"
 
 int delete_car(lot **parking_lot, int length, int width, char *number_plate);
 

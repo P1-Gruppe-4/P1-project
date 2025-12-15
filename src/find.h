@@ -6,7 +6,7 @@
 #define P1_GRUPPE4_FIND_H
 
 #include <string.h>
-#include <types.h>
+#include "types.h"
 
 int find_car_by_numberplate(lot **parking_lot, int length, int width, char *number_plate, int *loc_row, int *loc_col);
 

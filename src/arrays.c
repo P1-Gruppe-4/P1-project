@@ -5,7 +5,7 @@
  */
 
 // Include headerfile
-#include <arrays.h>
+#include "arrays.h"
 
 // Function that dynamically allocates a two dimensional array for the parkinglot
 lot **array_alloc(int length, int width) {

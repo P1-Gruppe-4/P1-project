@@ -6,7 +6,7 @@
 #define P1_GRUPPE4_MAIN_H
 
 #include <stdio.h>
-#include <menu.h>
+#include "menu.h"
 
 int main(int argc, char* argv[]);
 
