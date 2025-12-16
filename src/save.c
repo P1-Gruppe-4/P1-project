@@ -1,5 +1,7 @@
 #include "save.h"
 
+#include "arrays.h"
+
 /*This function extracts the current parking-lot data and writes it into an autosave.txt file
  *Doing this ensure that there is always at least one fallback save for the user.
  *This function additionally creates an autosave-file if there is none yet. Do not, that the autosave file
@@ -18,7 +20,7 @@ void auto_save(lot **parking_lot, int length, int width) {
     //writes every individual array-cell into autosave.txt
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
-            //Writes the status of the lot, whether it is handicapped and whether it has a car into autosave.txt
+            //Writes the status of the lot, whether it is handicappe etc. into autosave.txt
             fprintf(auto_save,
                     "%d %d %lf %d %d %d %lf %lf %d %d %d %d",
                     parking_lot[i][j].status,
@@ -49,14 +51,18 @@ void auto_save(lot **parking_lot, int length, int width) {
 
 //This function extracts saved data in the correct format from the provided save_file
 lot **load_save(FILE *save_file, int *length, int *width) {
+    //the length and array of the loaded parkinglot are saved in length_arr and width_arr
     int length_arr, width_arr;
     fscanf(save_file, "%d %d", &length_arr, &width_arr);
     *length = length_arr;
     *width = width_arr;
 
+    // a new parkinglot is allocated using the aformentioned length and width
     lot **parking_lot = array_alloc(length_arr, width_arr);
+
     for (int i = 0; i < length_arr; i++) {
         for (int j = 0; j < width_arr; j++) {
+            //For every lot in the parking_lot, it's variables such as status etc. are scanned from the file and saved
             fscanf(save_file,
                      "%d %d %lf %d %d %d %lf %lf %d %d %d %d",
                      &parking_lot[i][j].status,
@@ -72,6 +78,7 @@ lot **load_save(FILE *save_file, int *length, int *width) {
                      &parking_lot[i][j].row,
                      &parking_lot[i][j].col
              );
+            //If the lot has a car, the information of the car is also saved
             if (parking_lot[i][j].has_car == 1) {
                 fscanf(save_file, " %lf %d %d %d %d %s", &parking_lot[i][j].current_car.duration_stay,
                        &parking_lot[i][j].current_car.handicap, &parking_lot[i][j].current_car.passenger,
@@ -79,7 +86,10 @@ lot **load_save(FILE *save_file, int *length, int *width) {
             }
         }
     }
+    //the file is closed
     fclose(save_file);
+    //The parkinglot is printed
     array_print(parking_lot, length_arr, width_arr);
+    //The parkinglot is returned
     return parking_lot;
 }

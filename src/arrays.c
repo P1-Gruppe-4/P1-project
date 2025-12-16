@@ -37,8 +37,7 @@ void array_free(lot **parking_lot, int length) {
     free(parking_lot);
 }
 
-//This functions print out the parkingLot array in a 2d grid. It is not necessarily suited for the later, user-interface
-//of our application and should maybe rather only be used for inital debugging purposes
+//This functions print out the parkingLot array in a 2d grid
 void array_print(lot **parking_lot, int length, int width) {
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {

@@ -3,6 +3,7 @@
 
 int main(int argc, char* argv[])
 {
+    //some art for the intro screen
     printf(
 " __                  __      __                __                                 ______   _______  \n"
 "|  \\                |  \\    |  \\              |  \\                               /      \\ |       \\ \n"
@@ -15,7 +16,7 @@ int main(int argc, char* argv[])
 " \\$$$$$$$$ \\$$$$$$    \\$$$$  \\$$ \\$$  \\$$  \\$$ \\$$ \\$$$$$$$$  \\$$$$$$$ \\$$       \\$$$$$$$$ \\$$$$$$$ \n"
 "\n"
 );
-
+    //function main_menu is called and then 0 is returned
     main_menu();
     return 0;
 }

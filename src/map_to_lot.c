@@ -80,7 +80,7 @@ double duration_score(lot *l, car c) {
     //you don't want the difference in the parking space and the car's time is over 4 hours, it's too much waste.
 
     if (difference > max_diff) {
-        return 0; //hvis det over 4 timer så return 0
+        return 0; //If difference is bigger than 4, return 0
     } else {
         return 1 - (difference / max_diff);
         //Returns a value based on how big the difference is between difference and max_diff
@@ -118,26 +118,32 @@ void map_to_lot(car car_user, lot **parking_lot, int length, int width) {
     //Stops function if no matches or match_lot is empty
     if (matches == 0 || match_lot == NULL) {
         printf("No parking space matches your car\n");
+        //Frees match_lot
         free(match_lot);
         return;
     }
 
-
+    //loops through all the matches
     for (int i = 0; i < matches; i++) {
+        // durations and passengerscore are calculated for each match
         d_score = duration_score(&match_lot[i], car_user);
         p_score = passenger_score(&match_lot[i], car_user);
+        //match score is calculated for each match
         match_score = calc_score(p_score, d_score);
+        //if match_score is bigger than max_match_score, match_score is the new max, and its col and row are saved in match_l and match_w
         if (match_score > max_match_score) {
             max_match_score = match_score;
             match_l = match_lot[i].row;
             match_w = match_lot[i].col;
         }
     }
+    //The lot that matches the car best is updated accordingly
     parking_lot[match_l][match_w].row = match_l;
     parking_lot[match_l][match_w].col = match_w;
     parking_lot[match_l][match_w].current_car = car_user;
     parking_lot[match_l][match_w].has_car = 1;
     parking_lot[match_l][match_w].status = Status_Reserved;
 
+    //match_lot is freed
     free(match_lot);
 }
