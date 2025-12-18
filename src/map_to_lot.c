@@ -53,6 +53,7 @@ lot *filter_spots(car car_user, lot **parking_lot, int length, int width, int *m
         return NULL;
     }
     int count2 = 0;
+    //Adds all the empty spots that fit the car of the user to result array
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
             if (parking_lot[i][j].status == Status_Free && parking_lot[i][j].has_car == 0) {
@@ -65,17 +66,18 @@ lot *filter_spots(car car_user, lot **parking_lot, int length, int width, int *m
             }
         }
     }
+    //Assign the matches pointer amount of spots that fit the car, and return the array of fitting spots
     *matches = count;
     return result;
 }
 
 //Function to calculate a durations score based on the duration time of the parking space and the car
-double duration_score(lot *l, car c) {
+double duration_score(lot l, car c) {
     //if the car needs to be parked longer than the space allows, return 0
-    if (c.duration_stay > l->max_duration) {
+    if (c.duration_stay > l.max_duration) {
         return 0;
     }
-    double difference = l->max_duration - c.duration_stay;
+    double difference = l.max_duration - c.duration_stay;
     double max_diff = 4;
     //you don't want the difference in the parking space and the car's time is over 4 hours, it's too much waste.
 
@@ -88,8 +90,8 @@ double duration_score(lot *l, car c) {
 }
 
 //Function to return a passengerscore, based on how well the parkingspot matches the car
-double passenger_score(lot *l, car c) {
-    int val = c.passenger - l->preferred_passenger;
+double passenger_score(lot l, car c) {
+    int val = c.passenger - l.preferred_passenger;
     if (val == 0) {
         return 1.0;
     } else if (val == 1 || val == -1) {
@@ -126,8 +128,8 @@ void map_to_lot(car car_user, lot **parking_lot, int length, int width) {
     //loops through all the matches
     for (int i = 0; i < matches; i++) {
         // durations and passengerscore are calculated for each match
-        d_score = duration_score(&match_lot[i], car_user);
-        p_score = passenger_score(&match_lot[i], car_user);
+        d_score = duration_score(match_lot[i], car_user);
+        p_score = passenger_score(match_lot[i], car_user);
         //match score is calculated for each match
         match_score = calc_score(p_score, d_score);
         //if match_score is bigger than max_match_score, match_score is the new max, and its col and row are saved in match_l and match_w

@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-int main(int argc, char* argv[])
+int main()
 {
     //some art for the intro screen
     printf(

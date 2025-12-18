@@ -19,14 +19,12 @@ lot **array_alloc(int length, int width) {
 }
 
 // Function that sets status to free for all elements in array
-lot **array_fill(lot **parking_lot, int length, int width) {
+void **array_fill(lot **parking_lot, int length, int width) {
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
             parking_lot[i][j].status = Status_Free;
         }
     }
-
-    return parking_lot;
 }
 
 // Function that frees the dynamically allocated array
@@ -51,5 +49,3 @@ void array_print(lot **parking_lot, int length, int width) {
     }
     printf("\n");
 }
-
-

@@ -20,7 +20,7 @@ void auto_save(lot **parking_lot, int length, int width) {
     //writes every individual array-cell into autosave.txt
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < width; j++) {
-            //Writes the status of the lot, whether it is handicappe etc. into autosave.txt
+            //Writes the status of the lot, whether it is handicap etc. into autosave.txt
             fprintf(auto_save,
                     "%d %d %lf %d %d %d %lf %lf %d %d %d %d",
                     parking_lot[i][j].status,

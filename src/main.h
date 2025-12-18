@@ -8,7 +8,12 @@
 #include <stdio.h>
 #include "menu.h"
 
-int main(int argc, char* argv[]);
+/**
+ * @brief Main function that calls main_menu
+ *
+ * @return 0 when program is done
+ */
+int main();
 
 
 #endif //P1_GRUPPE4_MAIN_H
