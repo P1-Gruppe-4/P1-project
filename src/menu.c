@@ -212,11 +212,11 @@ void main_menu() {
 void lot_menu(lot **parking_lot, int length, int width) {
     //int variable to store user choice
     int choice = 0;
-    //while user does not choose 5
-    while (choice != 5) {
+    //while user does not choose 6
+    while (choice != 6) {
         //prompt them to choose
         printf(
-            "Press 1 to add car \nPress 2 to find car\nPress 3 to delete car\nPress 4 to print parkinglot\nPress 5 to save & go back to menu\n");
+            "Press 1 to add car \nPress 2 to find car\nPress 3 to delete car\nPress 4 to print parkinglot\nPress 5 to view occupancy of lot\nPress 6 to save & go back to menu\n");
         //save their choice in choice variable
         scanf("%d", &choice);
 
@@ -263,8 +263,12 @@ void lot_menu(lot **parking_lot, int length, int width) {
             // if user chooses 4, print the parkinglot via array_print function
         } else if (choice == 4) {
             array_print(parking_lot, length, width);
-            //if user chooses 5, save the parkinglot via auto_save function and free the dynamically allocated parkinglot
+            //if user chooses 5, calculate occupancy score and write in console via occupancy_lot
         } else if (choice == 5) {
+            printf("%.1lf%% of the lot is free\n", occupancy_lot(parking_lot, length, width));
+        }
+            //if user chooses 6, save the parkinglot via auto_save function and free the dynamically allocated parkinglot
+         else if (choice == 6) {
             auto_save(parking_lot, length, width);
             array_free(parking_lot, length);
             //end function via return

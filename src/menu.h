@@ -14,6 +14,7 @@
 #include "map_to_lot.h"
 #include "delete.h"
 #include "find.h"
+#include "occupancy.h"
 
 /**
  * @brief Continously shows user the main options (creating new lot, loading existing ect..) until user leaves app

@@ -14,4 +14,6 @@ add_executable(P1_gruppe4
         src/map_to_lot.c
         src/parking_lot.c
         src/find.c
-        src/delete.c)
+        src/delete.c
+        src/occupancy.c)
+
