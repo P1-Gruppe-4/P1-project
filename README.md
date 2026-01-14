@@ -1,4 +1,5 @@
 # P1-gruppe4
+All of this code is licensed under The John License. This license can be found in the srd/license.md file. 
 ## Deadline: 22nd of December 2025 | Exam: 29th of January 2026
 <h2>Rules for contributing<sup>1</sup></h2>
 <ul>
